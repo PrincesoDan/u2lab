@@ -1,16 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
 /**
- * El hero encadena los tres cuadros del mismo paisaje: el completo (ruido), el
- * del cono que se estrecha (método) y el del cielo vacío con una figura
- * (señal). La tesis de la página no se explica: se recorre.
+ * El hero es el paisaje en movimiento: el mismo cuadro de las ilustraciones,
+ * animado en loop detrás del titular. El recorrido de la tesis —ruido, método,
+ * señal— lo marca el scroll sobre el rótulo, no un cambio de imagen.
  *
  * El titular y el CTA están visibles desde el primer scroll —quien llega a
  * evaluar un proveedor no debería tener que bajar tres pantallas para saber
- * qué se ofrece—. Lo que cambia detrás es la imagen.
+ * qué se ofrece—. Lo que avanza detrás es el video.
  */
-const FRAMES = ['ruido', 'cono', 'senal'] as const
-
 export function HeroSequence({
   frames,
   children,
@@ -19,14 +17,15 @@ export function HeroSequence({
   children: React.ReactNode
 }) {
   const stage = useRef<HTMLDivElement>(null)
-  const layers = useRef<(HTMLDivElement | null)[]>([])
+  const video = useRef<HTMLVideoElement>(null)
   const [active, setActive] = useState(0)
 
   useEffect(() => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (reduced) {
-      // Sin movimiento: se muestra el último cuadro y se acabó la secuencia.
-      layers.current.forEach((l, i) => l && (l.style.opacity = i === 2 ? '1' : '0'))
+      // Sin movimiento: el video se congela en su primer cuadro y el rótulo
+      // se queda en el final del recorrido.
+      video.current?.pause()
       setActive(2)
       return
     }
@@ -41,12 +40,8 @@ export function HeroSequence({
         const travel = height - window.innerHeight
         const p = travel > 0 ? Math.min(Math.max(-top / travel, 0), 1) : 0
 
-        // Dos cruces suaves repartidos en el recorrido: 0→1 y 1→2.
-        const pos = p * 2
-        layers.current.forEach((l, i) => {
-          if (l) l.style.opacity = String(Math.max(0, 1 - Math.abs(pos - i)))
-        })
-        setActive(Math.round(pos))
+        // El recorrido reparte los tres rótulos: 0→1 y 1→2.
+        setActive(Math.round(p * 2))
       })
     }
 
@@ -63,29 +58,26 @@ export function HeroSequence({
   return (
     <div className="hero-seq" ref={stage}>
       <div className="hero-stage">
-        <div className="hero-frames" aria-hidden="true">
-          {FRAMES.map((name, i) => (
-            <div
-              className="hero-frame"
-              key={name}
-              ref={(el) => {
-                layers.current[i] = el
-              }}
-              style={{ opacity: i === 0 ? 1 : 0 }}
-            >
-              <img
-                src={`/image/${name}-1600.webp`}
-                srcSet={`/image/${name}-800.webp 800w, /image/${name}-1600.webp 1600w`}
-                sizes="100vw"
-                alt=""
-                loading={i === 0 ? 'eager' : 'lazy'}
-              />
-            </div>
-          ))}
-          <div className="hero-scrim" />
-        </div>
+        <div className="hero-content wrap">
+          <div className="hero-copy">{children}</div>
 
-        <div className="hero-content wrap">{children}</div>
+          {/* El video va a su tamaño, junto al texto y no debajo: la fuente son
+              720×816 y a pantalla completa se ampliaba hasta verse blanda.
+              `muted` y `playsInline` son lo que permite el autoplay en móvil;
+              el archivo no tiene pista de audio, así que no silencian nada. */}
+          <figure className="hero-figure" aria-hidden="true">
+            <video
+              className="hero-video"
+              ref={video}
+              src="/utopialab.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+            />
+          </figure>
+        </div>
 
         <div className="hero-track mono" aria-hidden="true">
           {frames.map((label, i) => (

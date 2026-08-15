@@ -20,7 +20,7 @@ export function Home() {
 
   return (
     <>
-      {/* 01 · HERO · la secuencia ruido → método → señal */}
+      {/* 01 · HERO · el paisaje en movimiento, ruido → método → señal */}
       <HeroSequence frames={c.hero.frames}>
         <div className="hero-left">
           <div className="kicker mono">{c.hero.kicker}</div>

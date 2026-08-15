@@ -1,10 +1,11 @@
 /* ==========================================================================
    Utopía Lab — hoja de estilos única.
 
-   Dirección «crema»: la paleta sale de las tres ilustraciones de public/image
-   (medida sobre los archivos, no estimada). El sitio es una ventana de papel
-   redondeada sobre fondo tinta; el hero encadena los tres cuadros del mismo
-   paisaje —ruido, método, señal— que son la tesis de la página.
+   La paleta sale de las ilustraciones de public/image (medida sobre los
+   archivos, no estimada). El papel es el blanco de utopialab-white.png, el
+   mismo fondo del video del hero: la página y la ilustración comparten hoja.
+   El sitio es una ventana de papel redondeada sobre fondo tinta; el hero
+   recorre el paisaje —ruido, método, señal— que es la tesis de la página.
 
    Las reglas comunes viven arriba; las de cada página van aisladas bajo
    `.page-<key>` porque varias clases (.cierre, .intro .lead, .op, .dim…)
@@ -16,8 +17,8 @@
 :root {
   /* Paleta extraída de las ilustraciones. El texto va SIEMPRE en --tinta:
      el naranja sobre papel no pasa contraste y este sitio se mira al sol. */
-  --papel: #f2e9d8;
-  --arena: #ead9bd;
+  --papel: #f9f7f5;
+  --arena: #efebe6;
   --tinta: #181818;
   --sol: #f0580c;
   --arco: #00417f;
@@ -349,65 +350,83 @@ header > * {
 }
 
 /* ==========================================================================
-   HERO · la secuencia ruido → método → señal
+   HERO · el paisaje en movimiento · ruido → método → señal
    ========================================================================== */
 
 .hero-seq {
-  height: 260vh;
+  height: 180vh;
   position: relative;
 }
 
+/* `svh` y no `vh`: en el móvil, `vh` mide la pantalla sin las barras del
+   navegador, así que el hero se dimensiona para un alto que no existe todavía
+   y el contenido termina más arriba de lo que se ve. */
 .hero-stage {
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100svh;
   min-height: 620px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   overflow: clip;
 }
 
-.hero-frames {
-  position: absolute;
-  inset: 0;
-}
+/* Cuando el contenido del hero no cabe en una pantalla —el móvil en vertical,
+   o cualquier pantalla baja— el alto fijo con `justify-content: center` lo
+   desborda por ARRIBA tanto como por abajo, y esa mitad se pierde debajo del
+   header flotante. Ahí el hero deja de ser una pantalla fija y fluye: el alto
+   lo pone el contenido y no hay nada que recortar. */
+@media (max-width: 820px), (max-height: 640px) {
+  .hero-seq {
+    height: auto;
+  }
 
-.hero-frame {
-  position: absolute;
-  inset: 0;
-  transition: opacity 0.12s linear;
-}
-
-.hero-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-  display: block;
-}
-
-/* El papel sube desde abajo y disuelve la ilustración en la página. Es lo que
-   deja el titular legible sobre cualquiera de los tres cuadros. */
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(242, 233, 216, 0) 58%,
-    rgba(242, 233, 216, 0.6) 78%,
-    var(--papel) 93%
-  );
+  .hero-stage {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    justify-content: flex-start;
+  }
 }
 
 .hero-content {
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 30ch);
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+  align-items: center;
   gap: clamp(24px, 4vw, 64px);
-  padding-bottom: clamp(48px, 8vh, 92px);
+  /* El header flota sobre el hero: sin este colchón, el kicker queda debajo de
+     la píldora de navegación en cuanto el contenido se centra. */
+  padding-top: clamp(104px, 13vh, 140px);
+  padding-bottom: clamp(48px, 6vh, 72px);
+}
+
+/* La columna de texto. En el ancho de la ventana el titular y el CTA van
+   juntos: quien llega a evaluar no debería tener que buscar el botón. */
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+/* El video se muestra a su tamaño y nunca por encima: la fuente son 720×816 y
+   ampliarla la deja blanda. El fondo del archivo es el mismo --papel de la
+   página, así que el cuadro se apoya en la hoja sin marco ni sombra. */
+.hero-figure {
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+}
+
+.hero-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 720 / 816;
+  border-radius: var(--r);
+  background: var(--papel);
 }
 
 .hero-left .kicker {
@@ -418,24 +437,26 @@ header > * {
   text-transform: uppercase;
   line-height: 1.5;
   margin-bottom: 18px;
-  background: rgba(242, 233, 216, 0.9);
+  background: var(--arena);
   border-radius: var(--r-pill);
   padding: 7px 14px;
 }
 
+/* El titular ya no ocupa el ancho de la pantalla sino el de su columna, así
+   que el tope baja: a 168px «From noise» se salía del texto. */
 .hero-left h1 {
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 0.86;
-  font-size: clamp(52px, 10.5vw, 168px);
+  font-size: clamp(46px, 6.6vw, 108px);
   color: var(--tinta);
 }
 
+/* Sin imagen detrás, el panel translúcido sobra: el claim y el CTA se apoyan
+   directamente en el papel. */
 .hero-right {
-  background: rgba(242, 233, 216, 0.9);
-  backdrop-filter: blur(4px);
-  border-radius: var(--r);
-  padding: clamp(18px, 2vw, 24px);
+  margin-top: clamp(22px, 3vh, 34px);
+  max-width: 46ch;
 }
 
 .hero-right .claim {
@@ -447,14 +468,6 @@ header > * {
   opacity: 0.85;
 }
 
-/* El CTA ocupa el ancho del panel: suelto se desbordaba de la columna. */
-.hero-right .book {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  white-space: normal;
-}
-
 .hero-right .microcopy {
   margin-top: 14px;
   font-size: 11px;
@@ -462,7 +475,16 @@ header > * {
   opacity: 0.6;
 }
 
-/* El rótulo de los tres cuadros: dice qué se está mirando. */
+/* Bajo 980px el header se parte en dos filas (marca e idioma arriba,
+   navegación debajo) y crece a ~104px: el colchón del hero se mide contra esa
+   altura, no contra la del escritorio. */
+@media (max-width: 980px) {
+  .hero-content {
+    padding-top: 122px;
+  }
+}
+
+/* El rótulo del recorrido: dice en qué punto de la tesis va el scroll. */
 .hero-track {
   position: absolute;
   left: clamp(20px, 5vw, 72px);
@@ -498,10 +520,32 @@ header > * {
 }
 
 @media (max-width: 820px) {
+  /* En una columna el orden es titular → video → CTA: el video queda en medio
+     y no empuja el botón fuera de la primera pantalla. `display: contents`
+     deshace la columna de texto para poder intercalarlo. */
   .hero-content {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 22px;
+  }
+
+  .hero-copy {
+    display: contents;
+  }
+
+  .hero-left {
+    order: 1;
+  }
+
+  .hero-figure {
+    order: 2;
+    justify-self: start;
+    max-width: min(100%, 340px);
+  }
+
+  .hero-right {
+    order: 3;
+    margin-top: 0;
   }
 
   .hero-track {
@@ -513,7 +557,15 @@ header > * {
   }
 }
 
-/* Sin movimiento: no hay secuencia, el hero es una sola pantalla. */
+/* Pantalla ancha pero baja (el móvil acostado, una ventana aplastada): el
+   video se mide contra el alto disponible para que no empuje el CTA fuera. */
+@media (min-width: 821px) and (max-height: 640px) {
+  .hero-figure {
+    max-width: min(460px, calc(72svh * 0.882));
+  }
+}
+
+/* Sin movimiento: no hay recorrido, el hero es una sola pantalla. */
 @media (prefers-reduced-motion: reduce) {
   .hero-seq {
     height: auto;
@@ -522,10 +574,6 @@ header > * {
   .hero-stage {
     position: relative;
     height: 100vh;
-  }
-
-  .hero-frame {
-    transition: none;
   }
 }
 
