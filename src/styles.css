@@ -1792,15 +1792,22 @@ footer {
   margin: clamp(30px, 4.5vh, 52px) 0 clamp(18px, 2.5vh, 28px);
 }
 
+/* La tarjeta es un arco, como los de la ilustración. El radio de arriba se
+   declara explícito —antes era `var(--r-pill)`, y 999px sobre una caja de 400
+   se escala hasta un semicírculo tan alto como la tarjeta entera— y el alto y
+   el colchón superior se derivan de él: así el número y el título caen debajo
+   de la curva y no fuera de la forma. */
 .tarjeta {
+  --arco: clamp(120px, 15vh, 184px);
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: clamp(190px, 26vh, 260px);
-  padding: clamp(20px, 2.6vw, 30px);
+  min-height: calc(var(--arco) + 150px);
+  padding: calc(var(--arco) * 0.78) clamp(20px, 2.6vw, 30px) clamp(20px, 2.6vw, 30px);
   background: var(--arena);
   border: none;
-  border-radius: var(--r-pill) var(--r-pill) var(--r) var(--r);
+  border-radius: 50% 50% var(--r) var(--r) / var(--arco) var(--arco) var(--r)
+    var(--r);
   text-decoration: none;
   color: var(--ink);
   transition:
@@ -1844,7 +1851,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  /* En una columna la tarjeta es mucho más ancha que alta: el arco se achata
+     para que las tres no ocupen media página. */
   .tarjeta {
+    --arco: 96px;
     min-height: 0;
   }
 }
