@@ -5,23 +5,21 @@ import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import type { Locale } from './i18n'
 import { CONTENT, DEFAULT_LOCALE } from './i18n'
-import { About } from './pages/About'
-import { Devices } from './pages/Devices'
+import { Cases } from './pages/Cases'
 import { Home } from './pages/Home'
-import { Interventions } from './pages/Interventions'
+import { Services } from './pages/Services'
 import { System } from './pages/System'
 import { Thinking } from './pages/Thinking'
 import type { PageKey } from './routes'
-import { ALL_ROUTES, pathFor } from './routes'
+import { ALL_ROUTES, LEGACY_REDIRECTS, pathFor } from './routes'
 import { SiteContext } from './site-context'
 import { useDocumentMeta } from './useDocumentMeta'
 
 const PAGES: Record<PageKey, ComponentType> = {
   home: Home,
-  about: About,
+  services: Services,
+  cases: Cases,
   system: System,
-  interventions: Interventions,
-  devices: Devices,
   thinking: Thinking,
 }
 
@@ -56,7 +54,7 @@ function SiteFrame({ locale, page }: { locale: Locale; page: PageKey }) {
       <div className={`site page-${page}`}>
         <Header />
         <Page />
-        {page !== 'home' && <Footer />}
+        <Footer />
       </div>
     </SiteContext.Provider>
   )
@@ -71,6 +69,10 @@ export function AppRoutes() {
         <Route path="/" element={<Navigate to={pathFor(detectLocale(), 'home')} replace />} />
         {ALL_ROUTES.map(({ locale, page, path }) => (
           <Route key={path} path={path} element={<SiteFrame locale={locale} page={page} />} />
+        ))}
+        {/* Estructura anterior: se redirige para no romper enlaces publicados. */}
+        {Object.entries(LEGACY_REDIRECTS).map(([from, to]) => (
+          <Route key={from} path={from} element={<Navigate to={to} replace />} />
         ))}
         <Route path="*" element={<Navigate to={pathFor(detectLocale(), 'home')} replace />} />
       </Routes>

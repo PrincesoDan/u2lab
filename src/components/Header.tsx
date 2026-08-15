@@ -1,9 +1,17 @@
 import { Link } from 'react-router-dom'
-import { pathFor } from '../routes'
+import { TEAM_ANCHOR, pathFor } from '../routes'
 import { useSite } from '../site-context'
 import { BookButton } from './BookButton'
 import { LangSwitch } from './LangSwitch'
 import { Mark } from './Rich'
+
+/**
+ * Navegación principal: Servicios · Casos · Sistema · Equipo. Pensamiento
+ * queda en el pie —cinco puertas conceptuales arriba era demasiado para quien
+ * llega a evaluar un proveedor—. Equipo no es una página: es la sección de la
+ * home, así que va como ancla.
+ */
+const NAV_PAGES = ['services', 'cases', 'system'] as const
 
 export function Header() {
   const { locale, page, t } = useSite()
@@ -16,20 +24,20 @@ export function Header() {
           <Mark />
         </Link>
 
-        <div className="bar-right">
-          {page === 'home' ? (
-            <nav className="nav mono">
-              <Link to={pathFor(locale, 'about')}>{t.common.nav.about}</Link>
-              <Link to={pathFor(locale, 'system')}>{t.common.nav.system}</Link>
-              <Link to={pathFor(locale, 'interventions')}>{t.common.nav.interventions}</Link>
-              <Link to={pathFor(locale, 'devices')}>{t.common.nav.devices}</Link>
-              <Link to={pathFor(locale, 'thinking')}>{t.common.nav.thinking}</Link>
-            </nav>
-          ) : (
-            <Link className="back mono" to={home}>
-              {t.common.backHome}
+        <nav className="nav mono">
+          {NAV_PAGES.map((key) => (
+            <Link
+              key={key}
+              to={pathFor(locale, key)}
+              aria-current={page === key ? 'page' : undefined}
+            >
+              {t.common.nav[key]}
             </Link>
-          )}
+          ))}
+          <Link to={`${home}#${TEAM_ANCHOR[locale]}`}>{t.common.nav.team}</Link>
+        </nav>
+
+        <div className="bar-right">
           <LangSwitch />
           <BookButton />
         </div>

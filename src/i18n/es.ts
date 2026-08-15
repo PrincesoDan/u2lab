@@ -4,89 +4,478 @@ export const es: Content = {
   common: {
     langName: 'Español',
     nav: {
-      about: 'Qué es',
+      services: 'Servicios',
+      cases: 'Casos',
       system: 'Sistema',
-      interventions: 'Intervenciones',
-      devices: 'Dispositivos',
+      team: 'Equipo',
       thinking: 'Pensamiento',
     },
     home: 'Inicio',
-    backHome: '← Volver al inicio',
-    book: 'Agendar una reunión',
-    bookShort: 'Agendar',
-    talk: 'Conversemos →',
-    tagline: 'Utopía como método',
+    book: 'Agendar una hora de diagnóstico',
+    bookShort: 'Agendar diagnóstico',
     switchLang: 'Cambiar idioma',
+    footer: {
+      location: 'Santiago de Chile',
+      nameLink: 'Qué significa el nombre',
+    },
   },
 
   home: {
     meta: {
-      title: '(U)² Lab · Infraestructura democrática de futuros',
+      title: 'Utopía Lab · Inteligencia anticipatoria para decidir bajo incertidumbre',
       description:
-        '(U)² Lab · Inteligencia anticipatoria. Infraestructura democrática de futuros. Utopía como método: leer, hacer visible y abrir el porvenir.',
+        'Instalamos capacidad de anticipación en organizaciones: tablero de observación, posición común y protocolo de incidencia medible. Piloto de doce semanas. Santiago de Chile.',
     },
-    kicker: '(U)² Lab · Utopía Laboratorio Urbano',
-    titleLines: ['Infraestructura', 'democrática', 'de futuros.'],
-    claim: 'Inteligencia anticipatoria allí donde el futuro todavía se está decidiendo.',
-    principles: [
-      [
-        { b: 'Anticipar no es predecir.' },
-        ' El futuro no se pronostica: se disputa. El Lab abre el campo de lo posible mientras la decisión todavía es reversible.',
+
+    hero: {
+      kicker: 'Utopía Lab · Inteligencia anticipatoria',
+      titleLines: ['Del ruido', 'a la señal.'],
+      sub: 'Instalamos capacidad de anticipación en organizaciones que necesitan decidir bajo incertidumbre. Metodología propia, antenas no convencionales y un tablero que su equipo opera solo.',
+      positions: [
+        [
+          { b: 'Anticipar no es predecir.' },
+          ' El futuro no se pronostica: se disputa. Trabajamos donde la decisión todavía es reversible.',
+        ],
+        [
+          { b: 'Método, no informe.' },
+          ' No entregamos un documento que se va con quien lo hizo. Instalamos una capacidad que queda.',
+        ],
       ],
-      [
-        { b: 'Método, no informe.' },
-        ' El Lab no entrega un documento que se va con quien lo hizo. Instala una capacidad que queda.',
+      microcopy:
+        'Sin costo y sin cotización previa. Primero contrastamos si el problema que describimos es el que le duele.',
+    },
+
+    problem: {
+      h2: 'Su organización ya produce más información de la que alcanza a leer.',
+      body: 'No es un problema de datos. Es un problema de jerarquía. Todo llega al mismo nivel: la minuta, el boletín, la nota de prensa, la conversación en terreno. Y cuando algo importa de verdad, se nota tarde.',
+      symptomsLabel: ['Tres síntomas', '01 — 03'],
+      symptoms: [
+        {
+          title: 'Llegan tarde a la ventana',
+          text: 'La votación, la consulta pública o el cambio de gabinete ya ocurrió cuando el análisis está listo.',
+        },
+        {
+          title: 'Cada área tiene su lectura',
+          text: 'Tres equipos que trabajan el mismo tema no logran firmar una sola posición común.',
+        },
+        {
+          title: 'No pueden demostrar incidencia',
+          text: 'Saben que influyeron. No tienen cómo mostrarlo con evidencia ante un directorio o un financista.',
+        },
       ],
-    ],
-    index: [
-      {
-        n: '01',
-        page: 'about',
-        title: 'Qué es',
-        desc: 'Una infraestructura, no una consultora. Cinco principios, cinco dimensiones de trabajo y un lugar de enunciación: América Latina.',
+      close: 'Ninguno se resuelve con más información. Se resuelven con un criterio para descartar.',
+    },
+
+    audience: {
+      h2: 'El mismo método, tres conversaciones distintas.',
+      label: ['Para quién', '01 — 03'],
+      tracks: [
+        {
+          n: '01',
+          title: 'Cooperación internacional y fundaciones',
+          text: 'Una cartera de contrapartes que produce conocimiento valioso y disperso. Necesita consolidarlo en posiciones comunes y demostrar incidencia con evidencia ante su sede.',
+          referenceLabel: 'Referencia',
+          reference: 'Ley Lafkenche · ONU Derechos Humanos',
+          cta: 'Ver el caso →',
+        },
+        {
+          n: '02',
+          title: 'Sector público, universidades y gobiernos locales',
+          text: 'Decide bajo presión y con información asimétrica. Necesita anticipar qué se viene en su sector y con qué frecuencia revisarlo, sin depender de un consultor externo cada vez.',
+          referenceLabel: 'Referencia',
+          reference: 'Consejo Municipal de Futuros',
+          cta: 'Ver el caso →',
+        },
+        {
+          n: '03',
+          title: 'Empresas y gremios con asuntos públicos',
+          text: 'Le afecta un proceso regulatorio, un conflicto territorial o un cambio de encuadre en la conversación pública. Necesita verlo formarse antes de que sea noticia.',
+          referenceLabel: 'Referencia',
+          reference: 'El futuro de la formación ante la inteligencia artificial',
+          cta: 'Ver el caso →',
+        },
+      ],
+    },
+
+    method: {
+      h2: 'Cinco pasos, siempre los mismos.',
+      sub: 'El método no cambia con el tema. Cambian las antenas.',
+      label: ['El método', '01 — 05'],
+      steps: [
+        {
+          n: '01',
+          title: 'Recibimos ruido',
+          text: 'Todo lo que circula alrededor del tema: documentos, actas, prensa, conversaciones, territorio.',
+        },
+        {
+          n: '02',
+          title: 'Identificamos señales',
+          text: 'Qué de todo eso anticipa una decisión, un cambio de posición o una ventana que se abre.',
+        },
+        {
+          n: '03',
+          title: 'Despejamos el ruido',
+          text: 'Lo que no es señal se descarta explícitamente. Es el paso que casi nadie hace y el que vuelve legible todo lo demás.',
+        },
+        {
+          n: '04',
+          title: 'Estructuramos',
+          text: 'Las señales se ordenan en categorías estables, comparables en el tiempo y entre organizaciones.',
+        },
+        {
+          n: '05',
+          title: 'Visualizamos',
+          text: 'Recién al final aparece el tablero. Es la superficie del método, no el método.',
+        },
+      ],
+      bridge: {
+        text: 'El marco conceptual que ordena esto —espacialización, visualización, futurización— está en',
+        link: 'Sistema →',
       },
-      {
-        n: '02',
-        page: 'system',
-        title: 'Sistema Utopía',
-        desc: 'El marco conceptual que ordena todo el Lab: la triada que lee un campo —espacialización, visualización, futurización— y las cinco operaciones que lo trabajan.',
+    },
+
+    pilot: {
+      h2: 'Doce semanas. Un solo tema. Tres equipos.',
+      label: ['El piloto', 'Doce semanas'],
+      isNot: {
+        label: 'Qué no es',
+        text: 'Una transformación organizacional ni un trabajo con toda su cartera.',
       },
-      {
-        n: '03',
-        page: 'interventions',
-        title: 'Intervenciones',
-        desc: 'El método en obra: una ley en disputa, el futuro de la formación ante la inteligencia artificial, un consejo municipal de futuros. Procesos abiertos, no monumentos terminados.',
+      is: {
+        label: 'Qué es',
+        text: 'Tres equipos que ya funcionan bien, sobre un tema donde usted ya tiene acervo acumulado.',
       },
-      {
-        n: '04',
-        page: 'devices',
-        title: 'Dispositivos',
-        desc: 'Cómo se organiza el Lab para durar. Una matriz y tres funciones: U-Lab piensa, U-Sync observa, U-NinA conecta.',
+      deliverablesLabel: 'Tres entregables',
+      deliverables: [
+        {
+          title: 'Posición común empaquetada',
+          text: 'El conocimiento disperso consolidado en una sola posición, en cuatro versiones: técnica, parlamentaria, mediática y territorial.',
+        },
+        {
+          title: 'Tablero de observación',
+          text: 'Proceso legislativo y regulatorio, mapa de actores, cuellos de botella, señales culturales y alertas anticipatorias. Cada equipo opera el suyo.',
+        },
+        {
+          title: 'Línea base y protocolo de incidencia',
+          text: 'La definición de incidencia la pone usted. Nosotros la volvemos medible.',
+        },
+      ],
+      risk: {
+        tag: 'Caja de riesgo acotado',
+        text: 'El éxito se define antes de empezar: cuatro condiciones observables, acordadas al inicio y medidas en la semana doce. 3 de 4 → se escala. Si no se cumplen, el piloto se cierra y se paga solo lo ejecutado.',
       },
-      {
-        n: '05',
-        page: 'thinking',
-        title: 'Pensamiento',
-        desc: 'El motor intelectual, por eje. Cinco líneas que son posiciones sobre el futuro, una biblioteca en curaduría y el recorrido de la investigación doctoral.',
+      foot: {
+        text: 'El piloto se estructura en tramos para caber en presupuesto corriente. Valores a convenir tras la conversación de validación.',
+        link: 'Ver los cuatro tramos →',
       },
-    ],
+    },
+
+    cases: {
+      h2: 'El método en obra.',
+      sub: 'Procesos abiertos, no monumentos terminados.',
+      cards: [
+        { n: '01', title: 'Ley Lafkenche' },
+        { n: '02', title: 'Consejo Municipal de Futuros' },
+        { n: '03', title: 'Formación ante la IA' },
+      ],
+      cta: 'Ver los casos →',
+    },
+
+    team: {
+      h2: 'Quién ejecuta esto.',
+      sub: 'Un equipo chico. Lo ejecutan las mismas personas que lo diseñan.',
+      label: ['Equipo', '01 — 03'],
+      members: [
+        {
+          name: 'Isabel Serra',
+          role: 'Jefatura de producto',
+          text: 'Arquitecta. Diseño del producto y conducción de los proyectos: alcance, entregables y relación con las contrapartes.',
+        },
+        {
+          name: 'Genaro Cuadros',
+          role: 'Coordinación de incidencia',
+          text: 'Arquitecto y urbanista. Trayectoria en política pública urbana y territorial en Chile; dirección de los proyectos anteriores.',
+        },
+        {
+          name: 'Equipo de desarrollo',
+          role: 'Ingeniería y tablero',
+          text: 'Construyen el tablero y las rutinas de procesamiento. Trabajan con herramientas de IA, lo que permite iterar el producto en días y no en meses.',
+        },
+      ],
+    },
+
     closing: {
-      h2: 'El futuro no se administra: se disputa.',
-      p: 'El Lab trabaja con instituciones públicas, universidades, organismos y organizaciones que necesitan decidir bajo incertidumbre. No vende un informe: instala una capacidad que queda cuando el trabajo termina.',
+      h2: 'Una hora para validar el diagnóstico.',
+      body: 'Antes de cotizar nada queremos contrastar dos cosas: si el problema que describimos es el que efectivamente le duele, y cómo define usted la incidencia que quiere medir.',
+      cta: 'Agendar la conversación',
     },
   },
 
-  about: {
+  services: {
     meta: {
-      title: 'Qué es · (U)² Lab',
+      title: 'Servicios · Utopía Lab',
       description:
-        '(U)² Lab: una infraestructura democrática de futuros. Método, no consultoría. Cinco principios, cinco dimensiones y un lugar de enunciación.',
+        'Cuatro tramos que se contratan juntos o por separado: exploración y datos, análisis prospectivo, decisión e incidencia. Más el tablero de observación y sus reglas de diseño.',
     },
-    kicker: 'El Lab en una definición',
-    title: 'Qué es',
-    sub: 'Una infraestructura democrática de futuros. Método que queda instalado, no informe que se lleva quien lo hizo.',
-    lead: ['(U)² Lab instala ', { b: 'capacidad de anticipar' }, ' donde se toman decisiones.'],
-    note: 'No es una consultora. Una consultora entrega un informe que se va con quien lo hizo; el Lab instala un método que queda. No vende pronósticos ni respuestas cerradas: construye la capacidad de leer, hacer visible y disputar el futuro, y la deja instalada en quienes deciden. La profundidad conceptual no es un obstáculo para operar —es lo que distingue una lectura anticipatoria de una opinión sobre el porvenir.',
+    kicker: 'Cómo se contrata',
+    titleLines: ['Cuatro', 'tramos.'],
+    sub: 'Se contratan juntos o por separado.',
+    lead: ['Cada tramo resuelve el anterior. ', { b: 'Puede detenerse en cualquiera' }, '.'],
+
+    tracksLabel: ['Los cuatro tramos', '01 — 04'],
+    deliverableLabel: 'Entregable',
+    durationLabel: 'Duración',
+    tracks: [
+      {
+        n: '01',
+        name: 'Exploración y datos',
+        text: 'Levantamiento y estructuración de fuentes sobre un tema. Usted necesita estos datos; se los entregamos ordenados y comparables.',
+        deliverable: 'Base estructurada + mapa de fuentes',
+        duration: '3–4 semanas',
+      },
+      {
+        n: '02',
+        name: 'Análisis prospectivo y priorización',
+        text: 'Escenarios posibles, cuellos de botella y jerarquización de señales. Qué importa y qué no, con el criterio explícito.',
+        deliverable: 'Informe prospectivo + tablero de observación',
+        duration: '4–6 semanas',
+      },
+      {
+        n: '03',
+        name: 'Decisión',
+        text: 'El tramo que casi nadie ofrece. Diseñamos cómo se toma la decisión: quiénes participan, con qué información y en qué condiciones de simetría.',
+        deliverable: 'Consejo del Futuro instalado + protocolo de deliberación',
+        duration: '4 semanas',
+      },
+      {
+        n: '04',
+        name: 'Incidencia',
+        text: 'Qué cuenta como incidencia y dónde. Acordado al inicio, medido al cierre, reutilizable con el resto de la cartera.',
+        deliverable: 'Línea base + protocolo de incidencia + documento de evidencia de una página',
+        duration: 'Transversal',
+      },
+    ],
+    note: 'Esto es una herramienta dentro de un plan de incidencia. No es el plan: la estrategia sigue siendo suya.',
+
+    dashboard: {
+      label: ['El tablero', 'Tres reglas de diseño'],
+      h2: 'Tres reglas de diseño.',
+      rules: [
+        {
+          title: 'Ni un tweet ni un libro',
+          text: 'Cada vista se lee en un minuto y se puede abrir hasta la fuente.',
+        },
+        {
+          title: 'Al ritmo de la decisión',
+          text: 'Ciclo mensual a trimestral, con un subconjunto de alertas semanales.',
+        },
+        {
+          title: 'Mobile-first, sin excusas',
+          text: 'Lo van a mirar en el celular, en terreno y entre reuniones.',
+        },
+      ],
+      clarification:
+        'Quién ve qué se co-define en el diagnóstico inicial. Es observación del entorno, no seguimiento de las personas ni de las organizaciones.',
+    },
+
+    organization: {
+      label: ['Cómo nos organizamos', 'U-Lab · U-Sync · U-NinA'],
+      h2: 'U-Lab piensa · U-Sync observa · U-NinA conecta.',
+      intro:
+        'Utopía Lab no tiene áreas: tiene dispositivos. Un área es una división administrativa; un dispositivo es una función que produce. Es información útil para quien ya decidió trabajar con nosotros.',
+      three: [
+        {
+          name: 'U-Lab',
+          verb: 'Piensa',
+          text: 'El motor intelectual. Produce el conocimiento que el resto del Lab opera: la investigación que fundamenta el Sistema Utopía, las metodologías que lo vuelven aplicable y la formación que lo instala en equipos e instituciones.',
+        },
+        {
+          name: 'U-Sync',
+          verb: 'Observa',
+          text: 'El observatorio de señales. Lee señales normativas, territoriales, institucionales y presupuestarias para reconocer hacia dónde empuja un proceso mientras todavía es reversible. Distinguir la decisión-bisagra del ruido es su operación central.',
+        },
+        {
+          name: 'U-NinA',
+          verb: 'Conecta',
+          text: 'La red de articulación. Vincula el trabajo con quienes deciden y con quienes disputan —instituciones, comunidades, universidades, organizaciones—, porque el conocimiento que no circula no cambia ninguna decisión.',
+        },
+      ],
+    },
+
+    faq: {
+      label: ['Preguntas frecuentes', '01 — 06'],
+      items: [
+        {
+          id: 'ia',
+          q: '¿Esto es otra consultora con ChatGPT encima?',
+          a: 'No entrenamos modelos. Usamos modelos existentes con contextos propios para obtener y estructurar información que antes era cara de conseguir. Lo que no es replicable es la metodología y el criterio de jerarquización.',
+        },
+        {
+          id: 'foda',
+          q: '¿En qué se diferencia de un FODA o un PESTEL?',
+          a: 'Esos marcos ordenan lo que usted ya sabe. Nosotros trabajamos sobre lo que todavía no está declarado: señales culturales, vacíos, cambios de posición que aún no se anuncian.',
+        },
+        {
+          id: 'tablero',
+          q: '¿Y si terminamos con un tablero que nadie mira?',
+          a: 'Es el riesgo real y lo tratamos como tal. Por eso el ritmo se ajusta al de sus decisiones, cada vista se lee en un minuto, y uno de los criterios de éxito es que su equipo lo opere sin nosotros.',
+        },
+        {
+          id: 'costo',
+          q: '¿Cuánto cuesta?',
+          a: 'Depende del alcance, del número de equipos y de las antenas que haya que instalar. Definimos valores después de la hora de diagnóstico. El piloto se estructura en tramos para caber en presupuesto corriente.',
+        },
+        {
+          id: 'requisitos',
+          q: '¿Qué necesitan de nosotros?',
+          a: 'Un tema, un equipo contraparte y acceso a lo que ya producen. El resto lo ponemos nosotros.',
+        },
+        {
+          id: 'nombre',
+          q: '¿Por qué «Utopía Lab»?',
+          a: 'Porque trabajamos sobre la distancia entre lo que una organización desea y lo que puede. Achicar esa brecha es el objetivo; el resto es método.',
+        },
+      ],
+    },
+  },
+
+  cases: {
+    meta: {
+      title: 'Casos · Utopía Lab',
+      description:
+        'El método en obra: Ley Lafkenche, Consejo Municipal de Futuros, el futuro de la formación ante la IA y la Mesa del Transantiago. Contexto, intervención y resultado.',
+    },
+    kicker: 'El método en obra',
+    titleLines: ['El método', 'en obra.'],
+    sub: 'Procesos abiertos, no monumentos terminados.',
+    lead: ['Cada uno se cuenta igual: ', { b: 'contexto, intervención, resultado' }, '.'],
+
+    templateLabel: ['Cómo se cuenta cada caso', '01 — 04'],
+    templateIntro: 'La misma plantilla para todos, sin excepciones.',
+    templateSteps: [
+      { n: '01', title: 'Contexto', text: 'Qué estaba en disputa y quién decidía.' },
+      { n: '02', title: 'Intervención', text: 'Qué antenas se instalaron y qué se descartó.' },
+      { n: '03', title: 'Resultado', text: 'Qué quedó instalado y qué se puede verificar.' },
+      { n: '04', title: 'Qué se probó', text: 'La lección metodológica.' },
+    ],
+
+    casesLabel: ['Los casos', '01 — 04'],
+    provedLabel: 'Qué se probó',
+    cases: [
+      {
+        n: '01',
+        title: 'Ley Lafkenche',
+        subtitle: 'Derechos y territorio',
+        text: 'Análisis sistémico del conflicto entre borde costero, pueblos originarios y actividad productiva. El producto se entregó a la abogacía del Alto Comisionado de Derechos Humanos de la ONU.',
+        proved: 'El método en un conflicto de alta densidad jurídica y territorial.',
+      },
+      {
+        n: '02',
+        title: 'Consejo Municipal de Futuros',
+        subtitle: 'Prospectiva pública',
+        text: 'Instalación de capacidad de anticipación en gobiernos locales: qué señales mirar y con qué frecuencia revisarlas.',
+        proved: 'Dejar el instrumento instalado en el cliente.',
+      },
+      {
+        // TODO (contenidos): reescribir con la plantilla de cuatro pasos —
+        // contexto, intervención, resultado, qué se probó—. El texto de abajo
+        // es el que ya estaba publicado en Intervenciones; es el único caso
+        // que puede sostener el carril de empresas y gremios, así que debería
+        // quedar como el mejor documentado de los cuatro.
+        n: '03',
+        title: 'El futuro de la formación ante la inteligencia artificial',
+        text: 'Un mismo dispositivo prospectivo aplicado al futuro de distintas formaciones —pedagogía, arte, arquitectura, diseño— frente a una tecnología que ya no altera el entorno del trabajo, sino su objeto mismo. No pronostica el fin de ninguna disciplina: hace visible la brecha entre nombrar el futuro y tener método para decidirlo, y la vuelve discutible. Método replicado en instituciones de Chile y el extranjero.',
+        status: 'En documentación',
+      },
+      {
+        n: '04',
+        title: 'Mesa del Transantiago',
+        subtitle: 'Coordinación multiactor',
+        text: 'Señales dispersas de múltiples organizaciones convertidas en una posición común, desde el Laboratorio de Desarrollo Urbano.',
+        proved: 'La coordinación entre organizaciones distintas.',
+      },
+    ],
+  },
+
+  system: {
+    meta: {
+      title: 'Sistema Utopía · Utopía Lab',
+      description:
+        'Sistema Utopía: el marco conceptual de Utopía Lab. La triada —espacialización, visualización, futurización—, las cinco operaciones del método, los cinco principios y las cinco dimensiones de trabajo.',
+    },
+    kicker: 'El marco conceptual',
+    titleLines: ['Sistema', 'Utopía'],
+    header: [
+      'No vendemos informes. Instalamos ',
+      { b: 'infraestructura' },
+      ': una capacidad de anticipación que queda operando cuando el proyecto termina. El proyecto es el vehículo; la infraestructura es el resultado.',
+    ],
+    sub: 'El dispositivo teórico que ordena todo el Lab: cómo se lee la producción de futuros.',
+    lead: ['Un sistema para leer cómo las sociedades ', { b: 'producen futuros' }, '.'],
+    note: 'La utopía no como modelo de sociedad correcta, sino como forma de conocimiento anticipatorio: un método crítico y situado para leer, hacer visible y abrir el porvenir. Su premisa: anticipar no es predecir. El Sistema opera a través de una triada de operaciones encadenadas.',
+    triadLabel: ['Triada operativa', '01 — 03'],
+    triad: [
+      {
+        n: '01',
+        question: '¿Cómo se inscribe el futuro en el territorio?',
+        name: 'Espacialización',
+        def: 'Leer un campo —un barrio, una ley, una organización, un conflicto, una transición— como el lugar donde el futuro ya se está jugando. Sitúa el análisis en campos de fuerza, materialidades y escalas: situar antes de proyectar.',
+      },
+      {
+        n: '02',
+        question: '¿Cómo se vuelve visible, imaginable y discutible?',
+        name: 'Visualización',
+        def: 'Hacer visible el sistema de lo posible: traducir procesos complejos en formas legibles y compartibles, para volver discutible lo que todavía no existe y poder proyectarlo.',
+      },
+      {
+        n: '03',
+        question: '¿Cómo se construyen y disputan horizontes posibles?',
+        name: 'Futurización',
+        def: 'Abrir horizontes de futuro sin encerrarlos en un pronóstico. Anticipar no es predecir: es ensanchar y disputar lo que puede pasar.',
+      },
+    ],
+    methodLabel: ['Método · cinco operaciones', 'M1 — M5'],
+    methodIntro: [
+      'La triada dice cómo el Lab ',
+      { b: 'lee' },
+      ' un campo. Las cinco operaciones dicen cómo lo ',
+      { b: 'trabaja' },
+      ': el proceso que convierte esa lectura en decisiones. Se activan en secuencia completa o de forma modular.',
+    ],
+    producesLabel: 'Produce',
+    ops: [
+      {
+        n: 'M1',
+        name: 'Anticipar',
+        def: 'Leer lo emergente y detectar los cambios cuando todavía son débiles —antes de que se vuelvan crisis o irreversibilidad.',
+        produces: ['señales débiles', 'tendencias', 'riesgos', 'tensiones'],
+      },
+      {
+        n: 'M2',
+        name: 'Explorar',
+        def: 'Abrir el espacio de los futuros posibles, en lugar de proyectar el presente hacia adelante como si fuera destino.',
+        produces: ['escenarios alternativos', 'bifurcaciones', 'incertidumbres críticas'],
+      },
+      {
+        n: 'M3',
+        name: 'Criticar',
+        def: 'Desnaturalizar el presente y los futuros que se dan por supuestos: hacer visible quién decide, con qué intereses y bajo qué marcos.',
+        produces: ['supuestos revelados', 'análisis de poder', 'marcos ideológicos a la vista'],
+      },
+      {
+        n: 'M4',
+        name: 'Participar',
+        def: 'Co-construir los futuros con los actores diversos que habitan un territorio o una institución, no decidir por ellos.',
+        produces: ['visiones compartidas', 'conflictos y acuerdos', 'legitimidad social'],
+      },
+      {
+        n: 'M5',
+        name: 'Proyectar',
+        def: 'Orientar la acción hacia los futuros deseables: convertir el análisis en criterios que sostienen una decisión, no en un informe que se archiva.',
+        produces: ['horizontes normativos', 'criterios de decisión', 'hoja de ruta'],
+      },
+    ],
+
     principlesLabel: ['Cinco principios', 'Lo que el Lab sostiene'],
     principles: [
       {
@@ -117,7 +506,7 @@ export const es: Content = {
     ],
     dimsLabel: ['Cinco dimensiones', 'El problema · lo que aporta el Lab'],
     problemHead: 'El problema',
-    contributionHead: 'Lo que aporta (U)² Lab',
+    contributionHead: 'Lo que aporta Utopía Lab',
     dims: [
       {
         n: '01',
@@ -292,220 +681,17 @@ export const es: Content = {
       h2: 'Se piensa desde América Latina, no como periferia.',
       p: 'El Lab opera desde Santiago de Chile, y desde América Latina como lugar de enunciación: no como margen que aplica marcos ajenos, sino como sitio desde donde se produce pensamiento anticipatorio situado. Los futuros que imagina tienen fecha, geografía y lengua.',
     },
-  },
-
-  system: {
-    meta: {
-      title: 'Sistema Utopía · (U)² Lab',
-      description:
-        'Sistema Utopía: el marco conceptual del (U)² Lab. La triada —espacialización, visualización, futurización— y las cinco operaciones del método.',
-    },
-    kicker: 'El marco conceptual',
-    titleLines: ['Sistema', 'Utopía'],
-    sub: 'El dispositivo teórico que ordena todo el Lab: cómo se lee la producción de futuros.',
-    lead: ['Un sistema para leer cómo las sociedades ', { b: 'producen futuros' }, '.'],
-    note: 'La utopía no como modelo de sociedad correcta, sino como forma de conocimiento anticipatorio: un método crítico y situado para leer, hacer visible y abrir el porvenir. Su premisa: anticipar no es predecir. El Sistema opera a través de una triada de operaciones encadenadas.',
-    triadLabel: ['Triada operativa', '01 — 03'],
-    triad: [
-      {
-        n: '01',
-        question: '¿Cómo se inscribe el futuro en el territorio?',
-        name: 'Espacialización',
-        def: 'Leer un campo —un barrio, una ley, una organización, un conflicto, una transición— como el lugar donde el futuro ya se está jugando. Sitúa el análisis en campos de fuerza, materialidades y escalas: situar antes de proyectar.',
-      },
-      {
-        n: '02',
-        question: '¿Cómo se vuelve visible, imaginable y discutible?',
-        name: 'Visualización',
-        def: 'Hacer visible el sistema de lo posible: traducir procesos complejos en formas legibles y compartibles, para volver discutible lo que todavía no existe y poder proyectarlo.',
-      },
-      {
-        n: '03',
-        question: '¿Cómo se construyen y disputan horizontes posibles?',
-        name: 'Futurización',
-        def: 'Abrir horizontes de futuro sin encerrarlos en un pronóstico. Anticipar no es predecir: es ensanchar y disputar lo que puede pasar.',
-      },
-    ],
-    methodLabel: ['Método · cinco operaciones', 'M1 — M5'],
-    methodIntro: [
-      'La triada dice cómo el Lab ',
-      { b: 'lee' },
-      ' un campo. Las cinco operaciones dicen cómo lo ',
-      { b: 'trabaja' },
-      ': el proceso que convierte esa lectura en decisiones. Se activan en secuencia completa o de forma modular.',
-    ],
-    producesLabel: 'Produce',
-    ops: [
-      {
-        n: 'M1',
-        name: 'Anticipar',
-        def: 'Leer lo emergente y detectar los cambios cuando todavía son débiles —antes de que se vuelvan crisis o irreversibilidad.',
-        produces: ['señales débiles', 'tendencias', 'riesgos', 'tensiones'],
-      },
-      {
-        n: 'M2',
-        name: 'Explorar',
-        def: 'Abrir el espacio de los futuros posibles, en lugar de proyectar el presente hacia adelante como si fuera destino.',
-        produces: ['escenarios alternativos', 'bifurcaciones', 'incertidumbres críticas'],
-      },
-      {
-        n: 'M3',
-        name: 'Criticar',
-        def: 'Desnaturalizar el presente y los futuros que se dan por supuestos: hacer visible quién decide, con qué intereses y bajo qué marcos.',
-        produces: ['supuestos revelados', 'análisis de poder', 'marcos ideológicos a la vista'],
-      },
-      {
-        n: 'M4',
-        name: 'Participar',
-        def: 'Co-construir los futuros con los actores diversos que habitan un territorio o una institución, no decidir por ellos.',
-        produces: ['visiones compartidas', 'conflictos y acuerdos', 'legitimidad social'],
-      },
-      {
-        n: 'M5',
-        name: 'Proyectar',
-        def: 'Orientar la acción hacia los futuros deseables: convertir el análisis en criterios que sostienen una decisión, no en un informe que se archiva.',
-        produces: ['horizontes normativos', 'criterios de decisión', 'hoja de ruta'],
-      },
-    ],
-    invite: {
-      h2: 'Trabajar con el Lab.',
-      p: 'El Lab activa este método con instituciones públicas, universidades, organismos y empresas que necesitan decidir bajo incertidumbre. No vende un informe: instala una capacidad que queda cuando el trabajo termina.',
-    },
-  },
-
-  interventions: {
-    meta: {
-      title: 'Intervenciones · (U)² Lab',
-      description:
-        'Intervenciones del (U)² Lab: el método operando sobre territorios, instituciones y campos donde el futuro todavía se está decidiendo.',
-    },
-    kicker: 'El método en obra',
-    titleLines: ['Interven-', 'ciones'],
-    sub: 'El método operando allí donde el futuro todavía se está decidiendo: una ley, una comuna, un campo de formación.',
-    lead: [
-      'No monumentos terminados. ',
-      { b: 'Procesos abiertos' },
-      ', donde el futuro aún se disputa.',
-    ],
-    note: 'Cada intervención lleva la operación de la triada que mejor la encarna —espacializar, visualizar, futurizar— y su dimensión de trabajo. Todas están en desarrollo: se presentan como procesos en curso, no como resultados cerrados. Los clientes no se nombran; el conflicto y el territorio, sí.',
-    casesLabel: ['Casos', 'En desarrollo'],
-    cases: [
-      {
-        op: '01 · Espacialización',
-        dim: 'Política y territorial',
-        status: 'En desarrollo',
-        title: 'Una ley de reconocimiento territorial en disputa',
-        desc: 'Lectura anticipatoria de un conflicto por el borde costero. La Ley 20.249 reconoce el uso consuetudinario de los pueblos del litoral, y hoy enfrenta un intento de modificación que invoca su lentitud. El Lab analiza el sistema —normativo, institucional y discursivo— que produce esa lentitud, y lo traduce en argumentos trazables para el trámite legislativo en curso. Situar el litoral como el lugar donde el futuro ya se está decidiendo.',
-      },
-      {
-        op: '02 · Visualización',
-        dim: 'Académica',
-        status: 'En desarrollo',
-        title: 'Futuros de la formación ante la inteligencia artificial',
-        desc: 'Un mismo dispositivo prospectivo aplicado al futuro de distintas formaciones —pedagogía, arte, arquitectura, diseño— frente a una tecnología que ya no altera el entorno del trabajo, sino su objeto mismo. No pronostica el fin de ninguna disciplina: hace visible la brecha entre nombrar el futuro y tener método para decidirlo, y la vuelve discutible. Método replicado en instituciones de Chile y el extranjero.',
-      },
-      {
-        op: '03 · Futurización',
-        dim: 'Institucional',
-        status: 'En desarrollo',
-        title: 'Consejo de Futuros Municipales',
-        desc: 'El Lab diseña, en una comuna de Santiago, un órgano consultivo para decidir a veinticinco años: un consejo plural que produce diagnóstico, escenarios y visión, y los conecta con los instrumentos formales de planificación. Su rasgo definitorio es la continuidad —reglas de traspaso entre gobiernos para que la capacidad de anticipar no dependa de una sola voluntad—. Infraestructura democrática de futuros hecha dispositivo municipal.',
-      },
-    ],
-    closing: [
-      'El mismo método opera además en la ',
-      { b: 'dimensión empresarial y organizacional' },
-      ' —anticipación de trayectorias y capacidades en los equipos que deciden— y en la ',
-      { b: 'gestión anticipatoria de la inversión pública' },
-      '. Procesos en curso, que se documentan a medida que maduran.',
-    ],
-  },
-
-  devices: {
-    meta: {
-      title: 'Dispositivos · (U)² Lab',
-      description:
-        'Los dispositivos del (U)² Lab: U-Lab piensa, U-Sync observa, U-NinA conecta. Una matriz y tres funciones de una infraestructura democrática de futuros.',
-    },
-    kicker: 'Cómo se organiza el Lab',
-    titleLines: ['Disposi-', 'tivos'],
-    sub: 'Una matriz y tres funciones. Pensar, observar, conectar: las tres operaciones de una infraestructura de futuros.',
-    lead: ['El Lab no tiene áreas. Tiene ', { b: 'dispositivos' }, '.'],
-    note: 'Un área es una división administrativa; un dispositivo es una función que produce. (U)² Lab es la matriz —cierra y firma todo lo que el Lab produce— y opera a través de tres dispositivos que ejercen tres funciones distintas y encadenadas: uno piensa, uno observa, uno conecta. La estructura es la forma que toma el método cuando debe durar más que quien lo aplica.',
-    matrixRole: 'Matriz · cierra y firma',
-    three: [
-      { name: 'U-Lab', verb: 'Piensa' },
-      { name: 'U-Sync', verb: 'Observa' },
-      { name: 'U-NinA', verb: 'Conecta' },
-    ],
-    listLabel: ['Los tres dispositivos', '01 — 03'],
-    producesLabel: 'Qué produce',
-    items: [
-      {
-        n: '01',
-        name: 'U-Lab',
-        verb: 'Piensa',
-        claim: 'El motor intelectual. Donde el método se construye antes de aplicarse.',
-        paragraphs: [
-          'U-Lab produce el conocimiento que el resto del Lab opera: la investigación que fundamenta el Sistema Utopía, las metodologías que traducen la teoría en dispositivos aplicables, y la escritura que las hace públicas y discutibles.',
-          'No es un área de estudios anexa a la práctica: es la condición de que la práctica no se degrade en técnica. La profundidad conceptual no retrasa la intervención —la hace defendible.',
-        ],
-        bullets: [
-          'Investigación y desarrollo teórico del Sistema Utopía',
-          'Metodologías de anticipación transferibles a contextos reales',
-          'Escritura académica y producción editorial',
-          'Formación: instalación del método en equipos e instituciones',
-        ],
-        link: 'Ver U-Lab →',
-      },
-      {
-        n: '02',
-        name: 'U-Sync',
-        verb: 'Observa',
-        claim: 'El observatorio de señales. Leer temprano hacia qué futuro empuja un proceso.',
-        paragraphs: [
-          'U-Sync observa señales —normativas, territoriales, institucionales, presupuestarias— no para predecir su desenlace, sino para reconocer la dirección de un proceso mientras todavía es reversible. Distinguir la decisión-bisagra del ruido es su operación central.',
-          'La observación es una capacidad, no un archivo. Lo que U-Sync produce no es un registro de lo que pasó, sino la lectura anticipada de lo que un proceso está a punto de volver irreversible.',
-        ],
-        bullets: [
-          'Observación sistemática de señales de cambio',
-          'Análisis de convergencia: cuándo varias señales apuntan al mismo futuro',
-          'Lectura anticipatoria de procesos normativos e institucionales en curso',
-          'Informes y síntesis periódicas de circulación pública',
-        ],
-        link: 'Ver U-Sync →',
-      },
-      {
-        n: '03',
-        name: 'U-NinA',
-        verb: 'Conecta',
-        claim:
-          'La red de articulación. El conocimiento que no circula no cambia ninguna decisión.',
-        paragraphs: [
-          'U-NinA articula al Lab con quienes deciden y con quienes disputan: instituciones, comunidades, universidades, organizaciones. Construye las alianzas que permiten que el método llegue donde se necesita, y no solo donde ya es entendido.',
-          'Es el dispositivo que garantiza que la anticipación sea efectivamente democrática: sin circulación, la capacidad de imaginar el futuro queda concentrada en quienes ya la tenían.',
-        ],
-        bullets: [
-          'Alianzas institucionales y académicas, nacionales e internacionales',
-          'Circulación del conocimiento hacia quienes deciden',
-          'Incidencia en procesos públicos en curso',
-          'Articulación con actores territoriales y comunidades',
-        ],
-        link: 'Ver U-NinA →',
-      },
-    ],
-    closing: {
-      tag: 'Por qué esta estructura',
-      h2: 'La forma es el argumento.',
-      p: 'Pensar sin observar produce teoría sin mundo. Observar sin conectar produce diagnósticos que nadie usa. Conectar sin pensar produce influencia sin fundamento. Los tres dispositivos existen porque una infraestructura de futuros solo funciona si las tres operaciones se sostienen entre sí —y si ninguna depende de una sola persona para seguir existiendo.',
+    bridge: {
+      text: 'Este es el marco. Cómo se aplica a un tema concreto, en doce semanas, está en',
+      link: 'El piloto →',
     },
   },
 
   thinking: {
     meta: {
-      title: 'Pensamiento · (U)² Lab',
+      title: 'Pensamiento · Utopía Lab',
       description:
-        'El pensamiento del (U)² Lab, por eje. Líneas de pensamiento y Biblioteca de futuros. Infraestructura democrática de futuros.',
+        'El pensamiento de Utopía Lab, por eje. Líneas de pensamiento y Biblioteca de futuros. Infraestructura democrática de futuros.',
     },
     kicker: 'U-Lab piensa · Producción de conocimiento',
     title: 'Pensamiento',

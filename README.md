@@ -1,6 +1,7 @@
-# (U)² Lab
+# Utopía Lab
 
-Sitio de [u2lab.cl](https://u2lab.cl/) migrado a **Vite + React + TypeScript**, bilingüe (español / inglés) y con un CTA de agendamiento de reuniones.
+Sitio de Utopía Lab: **Vite + React + TypeScript**, bilingüe (español / inglés), con la
+agenda de Cal.com como único destino de conversión.
 
 ## Desarrollo
 
@@ -18,31 +19,34 @@ npm run preview  # sirve dist/
 
 Todo lo configurable vive en [`src/config.ts`](src/config.ts):
 
-| Constante        | Para qué                                                       |
-| ---------------- | -------------------------------------------------------------- |
-| `BOOKING_URL`    | Destino del CTA "Agendar una reunión" (Calendly / Cal.com)      |
-| `CONTACT_EMAIL`  | Correo de contacto de las secciones de cierre                   |
-| `COPYRIGHT_YEAR` | Año del pie de página                                           |
+| Constante        | Para qué                                                        |
+| ---------------- | --------------------------------------------------------------- |
+| `BOOKING_URL`    | Destino de todos los CTA (Cal.com)                                |
+| `BRAND`          | El logotipo, tal como se escribe en header, pie y textos          |
+| `SITE_DOMAIN`    | Dominio canónico que aparece en el pie                            |
+| `COPYRIGHT_YEAR` | Año del pie de página                                             |
 
-> **Pendiente:** `BOOKING_URL` tiene un placeholder. Hay que reemplazarlo por el link real de agenda.
+No hay correo de contacto publicado: la agenda es la única puerta de entrada.
 
 ## Idiomas
 
 Cada idioma tiene su propia URL, con español por defecto:
 
-| Página        | Español              | English             |
-| ------------- | -------------------- | ------------------- |
-| Home          | `/es`                | `/en`               |
-| Qué es        | `/es/que-es`         | `/en/what-it-is`    |
-| Sistema       | `/es/sistema`        | `/en/system`        |
-| Intervenciones| `/es/intervenciones` | `/en/interventions` |
-| Dispositivos  | `/es/dispositivos`   | `/en/devices`       |
-| Pensamiento   | `/es/pensamiento`    | `/en/thinking`      |
+| Página      | Español          | English         |
+| ----------- | ---------------- | --------------- |
+| Home        | `/es`            | `/en`           |
+| Servicios   | `/es/servicios`  | `/en/services`  |
+| Casos       | `/es/casos`      | `/en/cases`     |
+| Sistema     | `/es/sistema`    | `/en/system`    |
+| Pensamiento | `/es/pensamiento`| `/en/thinking`  |
 
 `/` redirige a `/en` si el navegador está en inglés y a `/es` en cualquier otro caso
 (ver `detectLocale` en [`src/App.tsx`](src/App.tsx)).
 
 El selector ES/EN del header mantiene la página y el ancla actuales.
+
+**Equipo** no es una página: es la sección `#equipo` / `#team` de la home, y así se
+enlaza desde la navegación.
 
 ### Editar textos
 
@@ -61,16 +65,22 @@ Los slugs de cada idioma se definen en [`src/routes.ts`](src/routes.ts).
 
 ```
 src/
-  config.ts          Booking URL, email, año
-  routes.ts          Páginas, slugs por idioma, helper pathFor()
+  config.ts          Booking URL, marca, dominio, año
+  routes.ts          Páginas, slugs por idioma, anclas y redirecciones heredadas
   App.tsx            Router, marco de página, redirecciones
   site-context.ts    Contexto con { locale, page, t }
   useDocumentMeta.ts <title>, description, <html lang>, canonical y hreflang
-  styles.css         Hoja única migrada de los <style> del original
+  styles.css         Hoja única
   i18n/              types.ts + es.ts + en.ts
   components/        Header, Footer, LangSwitch, BookButton, Rich, Lines, SectionLabel
-  pages/             Home, About, System, Interventions, Devices, Thinking
+  pages/             Home, Services, Cases, System, Thinking
 ```
+
+### La home
+
+Ocho bloques, en este orden: hero, problema, para quién, método, piloto, casos, equipo y
+cierre. Primero el problema del visitante y después el marco conceptual —que vive completo
+en `/sistema` y se enlaza desde el bloque de método.
 
 ### Tipografía
 
@@ -88,28 +98,39 @@ también por tamaño.
 
 ### Estilos
 
-`styles.css` conserva las reglas del original. Las clases que en el sitio original
-significaban cosas distintas en cada archivo (`.cierre`, `.intro .lead`, `.op`, `.dim`)
-van aisladas bajo `.page-<key>`, que `App.tsx` pone en el contenedor de cada página.
+Las clases que significan cosas distintas según la página van aisladas bajo
+`.page-<key>`, que `App.tsx` pone en el contenedor de cada página.
 
 ## Deploy
 
 Es una SPA: el servidor debe devolver `index.html` para cualquier ruta, o los enlaces
-directos (`/es/que-es`) darán 404.
+directos (`/es/servicios`) darán 404.
 
 - **Netlify / Cloudflare Pages:** ya está el archivo [`public/_redirects`](public/_redirects).
 - **Vercel:** agregar `vercel.json` con
   `{ "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }] }`.
 - **nginx:** `try_files $uri $uri/ /index.html;`
 
-## Fuera de alcance
+### Redirecciones de la estructura anterior
 
-El sitio original tiene además `/u-lab`, `/u-sync`, `/u-nina` y `/tesis`. No están
-migradas. Los botones que apuntaban a ellas se muestran desactivados; los flags
-`DEVICE_PAGES_AVAILABLE` ([`src/pages/Devices.tsx`](src/pages/Devices.tsx)) y
-`THESIS_PAGE_AVAILABLE` ([`src/pages/Thinking.tsx`](src/pages/Thinking.tsx)) marcan
-dónde reactivarlos.
+`public/_redirects` manda los slugs viejos a los nuevos con 301 (`/es/que-es` →
+`/es/sistema`, `/es/intervenciones` → `/es/casos`, `/es/dispositivos` → `/es/servicios`, y
+sus equivalentes en inglés). `LEGACY_REDIRECTS` en `src/routes.ts` hace lo mismo dentro de
+la SPA, para los hosts que no leen ese archivo.
 
-En la Biblioteca de futuros los títulos de las obras se mantienen tal como aparecen en
-el original (edición citada por el Lab) en ambos idiomas; solo se traduce la glosa de
-cada referencia.
+**Pendiente de infraestructura:** el plan de contenidos también pide que el dominio
+anterior `u2lab.cl` siga vivo al menos doce meses redirigiendo a `utopialab.cl`, con su
+home apuntando a `/sistema`. Eso es una regla del host antiguo, no de esta aplicación: si
+se pusiera aquí, la home nueva quedaría inalcanzable.
+
+## Deuda de contenido
+
+1. **Un caso corporativo o gremial documentado.** El tercer carril de «Para quién»
+   (empresas y gremios) se apoya hoy en el caso de formación/IA, que es sectorial y no
+   corporativo.
+2. **El caso 03 con la plantilla completa.** «El futuro de la formación ante la
+   inteligencia artificial» todavía lleva el texto que ya estaba publicado en
+   Intervenciones, marcado como `En documentación`, en vez de los cuatro pasos —contexto,
+   intervención, resultado, qué se probó—. Hay un `TODO` en ambos archivos de contenido.
+3. **Fotos reales del equipo.** El bloque de equipo va sin fotos. Cuando lleguen, el
+   hueco está marcado con un `TODO` sobre `.persona .qname` en `styles.css`. Nada de stock.

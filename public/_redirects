@@ -1,1 +1,11 @@
-/*    /index.html   200
+# Estructura anterior → estructura nueva. El equivalente en la SPA está en
+# LEGACY_REDIRECTS (src/routes.ts), para los hosts que no leen este archivo.
+/es/que-es              /es/sistema     301
+/en/what-it-is          /en/system      301
+/es/intervenciones      /es/casos       301
+/en/interventions       /en/cases       301
+/es/dispositivos        /es/servicios   301
+/en/devices             /en/services    301
+
+# SPA: cualquier otra ruta la resuelve el router.
+/*                      /index.html     200

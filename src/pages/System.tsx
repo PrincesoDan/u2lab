@@ -1,12 +1,18 @@
-import { BookButton } from '../components/BookButton'
+import { Link } from 'react-router-dom'
 import { Lines } from '../components/Lines'
 import { Rich } from '../components/Rich'
 import { SectionLabel } from '../components/SectionLabel'
-import { CONTACT_EMAIL } from '../config'
+import { PILOT_ANCHOR, pathFor } from '../routes'
 import { useSite } from '../site-context'
 
+/**
+ * Conserva el Sistema Utopía y absorbe la antigua página «Qué es»: los cinco
+ * principios, las cinco dimensiones de trabajo y el lugar de enunciación. Es
+ * el activo diferenciador ante fundaciones y universidades, y lo que impide
+ * que la oferta se lea como "otra consultora con IA".
+ */
 export function System() {
-  const { t } = useSite()
+  const { locale, t } = useSite()
   const c = t.system
 
   return (
@@ -18,6 +24,15 @@ export function System() {
             <Lines lines={c.titleLines} />
           </h1>
           <p className="sub">{c.sub}</p>
+        </div>
+      </section>
+
+      {/* ENCABEZADO · INFRAESTRUCTURA, NO INFORME */}
+      <section className="encabezado">
+        <div className="wrap">
+          <p className="head-claim">
+            <Rich text={c.header} />
+          </p>
         </div>
       </section>
 
@@ -78,20 +93,78 @@ export function System() {
         </div>
       </section>
 
-      {/* INVITACIÓN */}
-      <section className="invita" id="trabajar">
+      {/* CINCO PRINCIPIOS */}
+      <section className="principios" id="principios">
         <div className="wrap">
-          <h2>{c.invite.h2}</h2>
-          <p>{c.invite.p}</p>
-          <a className="mailto-inline" href={`mailto:${CONTACT_EMAIL}`}>
-            {CONTACT_EMAIL}
-          </a>
-          <div className="cta-row">
-            <BookButton />
-            <a className="door mono" href={`mailto:${CONTACT_EMAIL}`}>
-              {t.common.talk}
-            </a>
-          </div>
+          <SectionLabel label={c.principlesLabel} />
+          {c.principles.map((p) => (
+            <div className="linea" key={p.n}>
+              <span className="num mono">{p.n}</span>
+              <div className="lbody">
+                <span className="ttl">{p.title}</span>
+                <p className="pos">{p.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CINCO DIMENSIONES */}
+      <section className="dims" id="dimensiones">
+        <div className="wrap">
+          <SectionLabel label={c.dimsLabel} />
+          {c.dims.map((d) => (
+            <div className="dim" key={d.n}>
+              <div className="dim-head">
+                <span className="dnum mono">{d.n}</span>
+                <div className="dname">{d.name}</div>
+                <p className="dclaim">{d.claim}</p>
+              </div>
+              <div className="dim-cols">
+                <div className="dim-col">
+                  <div className="chead mono">{c.problemHead}</div>
+                  {d.problems.map((text, i) => (
+                    <p className="prob" key={i}>
+                      {text}
+                    </p>
+                  ))}
+                </div>
+                <div className="dim-col">
+                  <div className="chead mono">{c.contributionHead}</div>
+                  {d.contributions.map((a) => (
+                    <div className="aporte" key={a.title}>
+                      <div className="an">{a.title}</div>
+                      <p className="ad">{a.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* LUGAR DE ENUNCIACIÓN */}
+      <section className="direccion">
+        <div className="wrap">
+          <div className="tag mono">{c.place.tag}</div>
+          <h2>{c.place.h2}</h2>
+          <p>{c.place.p}</p>
+        </div>
+      </section>
+
+      {/* PUENTE AL PILOTO */}
+      <section className="puente-piloto">
+        <div className="wrap">
+          <p>
+            {c.bridge.text}{' '}
+            <Link
+              className="puente-link mono"
+              to={`${pathFor(locale, 'home')}#${PILOT_ANCHOR[locale]}`}
+            >
+              {c.bridge.link}
+            </Link>
+          </p>
         </div>
       </section>
     </>

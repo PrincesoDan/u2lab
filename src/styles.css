@@ -1,5 +1,5 @@
 /* ==========================================================================
-   (U)² Lab — hoja de estilos única.
+   Utopía Lab — hoja de estilos única.
 
    Migrada desde los <style> inline del sitio original. Las reglas comunes
    viven arriba; las de cada página van aisladas bajo `.page-<key>` porque en
@@ -52,12 +52,6 @@ body {
   font-family: var(--font-mono);
 }
 
-sup.sq {
-  font-size: 0.55em;
-  vertical-align: super;
-  font-weight: 800;
-}
-
 a {
   color: inherit;
 }
@@ -82,8 +76,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  min-height: 64px;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .brand {
@@ -120,35 +115,25 @@ header {
   white-space: nowrap;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a[aria-current='page'] {
   border-color: var(--ink);
 }
 
-.back {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: border-color 0.15s;
-  white-space: nowrap;
-}
-
-.back:hover {
-  border-color: var(--ink);
-}
-
+/* Bajo 900px la navegación baja a una segunda fila del header. Antes se
+   escondía, pero ahora es la navegación real del sitio: ocultarla dejaría sin
+   rumbo justo al visitante que llega desde el celular. */
 @media (max-width: 900px) {
   .nav {
-    display: none;
+    order: 3;
+    width: 100%;
+    border-top: 1px solid var(--ink);
+    padding: 12px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
   }
-}
 
-@media (max-width: 560px) {
-  .back {
+  .nav::-webkit-scrollbar {
     display: none;
   }
 }
@@ -182,7 +167,7 @@ header {
   opacity: 0.3;
 }
 
-/* --- CTA "Agendar una reunión" -------------------------------------------- */
+/* --- CTA "Agendar una hora de diagnóstico" -------------------------------- */
 
 .book {
   display: inline-block;
@@ -235,7 +220,7 @@ header {
   }
 }
 
-/* Fila de CTAs (agendar + conversemos) en las secciones de cierre. */
+/* Fila del CTA en las secciones de cierre. */
 .cta-row {
   display: flex;
   flex-wrap: wrap;
@@ -244,7 +229,6 @@ header {
   margin-top: clamp(24px, 3.5vh, 40px);
 }
 
-.cta-row .door,
 .cta-row .book {
   margin-top: 0;
 }
@@ -341,11 +325,11 @@ h1 {
 }
 
 .page-system .intro .note,
-.page-interventions .intro .note {
+.page-cases .intro .note {
   max-width: 68ch;
 }
 
-.page-interventions .intro .lead {
+.page-cases .intro .lead {
   line-height: 1.2;
   font-size: clamp(20px, 2.4vw, 32px);
   max-width: 30ch;
@@ -365,12 +349,11 @@ footer {
   padding: clamp(52px, 9vh, 104px) 0 40px;
 }
 
-.page-about footer {
+/* Las páginas que terminan en blanco necesitan el filo contra el pie negro. */
+.page-system footer,
+.page-services footer,
+.page-cases footer {
   border-top: 2px solid var(--bg);
-}
-
-.page-devices footer {
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .foot-top {
@@ -495,84 +478,6 @@ footer {
   }
 }
 
-.indice {
-  border-bottom: 2px solid var(--ink);
-}
-
-.entrada {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: clamp(16px, 3vw, 48px);
-  align-items: center;
-  padding: clamp(32px, 4.8vh, 60px) clamp(14px, 1.6vw, 22px);
-  border-bottom: 1px solid var(--ink);
-  text-decoration: none;
-  color: var(--ink);
-  border-radius: var(--r);
-  transition:
-    background 0.18s,
-    color 0.18s;
-}
-
-.entrada:last-child {
-  border-bottom: none;
-}
-
-.entrada:hover {
-  background: var(--ink);
-  color: var(--bg);
-}
-
-.entrada .en {
-  font-size: 12px;
-  opacity: 0.5;
-  min-width: 30px;
-}
-
-.entrada .ebody {
-  min-width: 0;
-}
-
-.entrada .ettl {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  font-size: clamp(28px, 4.2vw, 56px);
-  margin-bottom: 12px;
-}
-
-.entrada .edesc {
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  line-height: 1.4;
-  font-size: clamp(15px, 1.7vw, 19px);
-  max-width: 56ch;
-  opacity: 0.8;
-}
-
-.entrada .earrow {
-  font-size: clamp(18px, 2.4vw, 30px);
-  opacity: 0.35;
-  transition:
-    opacity 0.18s,
-    transform 0.18s;
-}
-
-.entrada:hover .earrow {
-  opacity: 1;
-  transform: translateX(6px);
-}
-
-@media (max-width: 720px) {
-  .entrada {
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 14px;
-  }
-  .entrada .earrow {
-    display: none;
-  }
-}
-
 .page-home .cierre {
   background: var(--ink);
   color: var(--bg);
@@ -596,43 +501,8 @@ footer {
   opacity: 0.88;
 }
 
-.page-home .cierre .mailto {
-  display: block;
-  margin-top: clamp(26px, 3.5vh, 40px);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  font-size: clamp(30px, 4vw, 54px);
-  line-height: 1;
-  text-decoration: none;
-  color: var(--bg);
-  border-bottom: 2px solid var(--bg);
-  padding-bottom: 6px;
-  width: fit-content;
-}
-
-.page-home .cierre .door {
-  border-radius: var(--r);
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--bg);
-  border: 1px solid var(--bg);
-  padding: 15px 26px;
-  transition:
-    background 0.15s,
-    color 0.15s;
-}
-
-.page-home .cierre .door:hover {
-  background: var(--bg);
-  color: var(--ink);
-}
-
 /* ==========================================================================
-   QUÉ ES
+   PRINCIPIOS Y DIMENSIONES (absorbidos en /sistema)
    ========================================================================== */
 
 .principios {
@@ -686,13 +556,13 @@ footer {
   border-bottom: 2px solid var(--ink);
 }
 
-.page-about .dim {
+.page-system .dim {
   border-top: 1px solid var(--ink);
   padding-top: clamp(30px, 4.4vh, 52px);
   margin-top: clamp(30px, 4.4vh, 52px);
 }
 
-.page-about .dim:first-of-type {
+.page-system .dim:first-of-type {
   margin-top: clamp(18px, 2.6vh, 30px);
 }
 
@@ -989,62 +859,9 @@ footer {
   }
 }
 
-.invita {
-  padding: clamp(44px, 7vh, 96px) 0;
-}
-
-.invita h2 {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  font-size: clamp(28px, 4.4vw, 58px);
-  max-width: 20ch;
-}
-
-.invita p {
-  margin-top: clamp(20px, 3vh, 32px);
-  font-weight: 400;
-  line-height: 1.4;
-  font-size: clamp(16px, 1.9vw, 22px);
-  max-width: 56ch;
-  opacity: 0.9;
-}
-
-.invita .mailto-inline {
-  display: inline-block;
-  margin-top: clamp(20px, 3vh, 30px);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  font-size: clamp(20px, 2.4vw, 30px);
-  line-height: 1;
-  text-decoration: none;
-  border-bottom: 2px solid var(--ink);
-  padding-bottom: 4px;
-}
-
-.invita .door {
-  border-radius: var(--r);
-  display: inline-block;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  border: 1px solid var(--ink);
-  padding: 15px 26px;
-  transition:
-    background 0.15s,
-    color 0.15s;
-}
-
-.invita .door:hover {
-  background: var(--ink);
-  color: var(--bg);
-}
 
 /* ==========================================================================
-   INTERVENCIONES
+   CASOS
    ========================================================================== */
 
 .casos {
@@ -1118,274 +935,6 @@ footer {
   .caso {
     grid-template-columns: 1fr;
   }
-}
-
-.page-interventions .cierre {
-  padding: clamp(40px, 7vh, 88px) 0;
-}
-
-.page-interventions .cierre p {
-  font-weight: 400;
-  letter-spacing: -0.01em;
-  line-height: 1.32;
-  font-size: clamp(17px, 2vw, 24px);
-  max-width: 60ch;
-}
-
-.page-interventions .cierre p b {
-  font-weight: 700;
-}
-
-/* ==========================================================================
-   DISPOSITIVOS
-   ========================================================================== */
-
-.esquema {
-  padding: clamp(34px, 5vh, 64px) 0;
-  border-bottom: 2px solid var(--ink);
-}
-
-.matriz {
-  border: 2px solid var(--ink);
-  padding: clamp(22px, 3vh, 32px) clamp(20px, 2.4vw, 34px);
-  text-align: center;
-  max-width: 520px;
-  margin: 0 auto clamp(6px, 1vh, 12px);
-  border-radius: var(--r);
-}
-
-.matriz .mname {
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  font-size: clamp(22px, 2.6vw, 32px);
-  line-height: 1;
-}
-
-.matriz .mrole {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-top: 10px;
-}
-
-.stem {
-  width: 1px;
-  height: 36px;
-  background: var(--ink);
-  margin: 0 auto;
-}
-
-.tres {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  border: 1px solid var(--ink);
-  border-radius: var(--r);
-}
-
-.tcell {
-  padding: clamp(20px, 2.8vh, 30px) clamp(16px, 2vw, 26px);
-  text-align: center;
-}
-
-.tcell + .tcell {
-  border-left: 1px solid var(--ink);
-}
-
-.tcell .cn {
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  font-size: clamp(19px, 2.2vw, 27px);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.tcell .cv {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
-@media (max-width: 720px) {
-  .tres {
-    grid-template-columns: 1fr;
-  }
-  .tcell + .tcell {
-    border-left: none;
-    border-top: 1px solid var(--ink);
-  }
-}
-
-.disp {
-  padding: clamp(20px, 4vh, 44px) 0 clamp(30px, 5vh, 60px);
-  border-bottom: 2px solid var(--ink);
-}
-
-.d {
-  display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
-  gap: clamp(20px, 4vw, 64px);
-  padding: clamp(34px, 4.8vh, 58px) 0;
-  border-bottom: 1px solid var(--ink);
-}
-
-.d:first-of-type {
-  border-top: 1px solid var(--ink);
-}
-
-.d:last-child {
-  border-bottom: none;
-}
-
-.d-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.d-meta .dnum {
-  font-size: 13px;
-  opacity: 0.5;
-}
-
-.d-meta .dn {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  font-size: clamp(28px, 3.4vw, 44px);
-  line-height: 0.98;
-}
-
-.d-meta .dv {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
-.d-body {
-  min-width: 0;
-}
-
-.d-body .dl {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  font-size: clamp(18px, 2vw, 26px);
-  max-width: 44ch;
-  margin-bottom: 18px;
-}
-
-.d-body .dp {
-  font-weight: 400;
-  letter-spacing: -0.005em;
-  line-height: 1.48;
-  font-size: clamp(16px, 1.7vw, 19px);
-  max-width: 62ch;
-  opacity: 0.88;
-}
-
-.d-body .dp + .dp {
-  margin-top: 14px;
-}
-
-.d-body .hace {
-  margin-top: 22px;
-  padding-top: 18px;
-  border-top: 1px solid var(--ink);
-}
-
-.d-body .hace .hl {
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.5;
-  margin-bottom: 12px;
-}
-
-.d-body .hace ul {
-  list-style: none;
-}
-
-.d-body .hace li {
-  font-size: clamp(15px, 1.6vw, 17px);
-  line-height: 1.45;
-  padding: 6px 0 6px 18px;
-  position: relative;
-  max-width: 58ch;
-  opacity: 0.85;
-}
-
-.d-body .hace li:before {
-  content: '—';
-  position: absolute;
-  left: 0;
-  opacity: 0.5;
-}
-
-.d-body .verlo {
-  display: inline-block;
-  margin-top: 24px;
-  font-size: 12px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--ink);
-  border: 1px solid var(--ink);
-  padding: 13px 22px;
-  border-radius: var(--r);
-  transition:
-    background 0.15s,
-    color 0.15s;
-}
-
-.d-body .verlo:hover {
-  background: var(--ink);
-  color: var(--bg);
-}
-
-.d-body .verlo.off {
-  opacity: 0.35;
-  pointer-events: none;
-}
-
-@media (max-width: 820px) {
-  .d {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.page-devices .cierre {
-  background: var(--ink);
-  color: var(--bg);
-  padding: clamp(48px, 8vh, 104px) 0;
-}
-
-.page-devices .cierre .tag {
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.6;
-  margin-bottom: clamp(20px, 3vh, 32px);
-}
-
-.page-devices .cierre h2 {
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1;
-  font-size: clamp(28px, 4.4vw, 58px);
-  max-width: 22ch;
-}
-
-.page-devices .cierre p {
-  margin-top: clamp(22px, 3vh, 34px);
-  font-weight: 400;
-  line-height: 1.4;
-  font-size: clamp(16px, 1.9vw, 22px);
-  max-width: 56ch;
-  opacity: 0.9;
 }
 
 /* ==========================================================================
@@ -1568,4 +1117,800 @@ footer {
 .tesis-band .cta.off {
   opacity: 0.35;
   pointer-events: none;
+}
+
+/* ==========================================================================
+   HOME · BLOQUES NUEVOS
+   ========================================================================== */
+
+/* El microcopy del hero: va pegado al CTA, no al párrafo anterior. */
+.portada .microcopy {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  max-width: 52ch;
+  opacity: 0.6;
+}
+
+/* --- 02 · El problema ----------------------------------------------------- */
+
+.problema {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(40px, 7vh, 88px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.problema h2,
+.publicos h2,
+.metodo-home h2,
+.piloto h2,
+.casos-home h2,
+.equipo h2 {
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-size: clamp(30px, 4.8vw, 62px);
+  max-width: 22ch;
+}
+
+.problema .pbody {
+  margin-top: clamp(22px, 3vh, 34px);
+  margin-bottom: clamp(34px, 5vh, 60px);
+  font-weight: 400;
+  line-height: 1.44;
+  font-size: clamp(16px, 1.9vw, 22px);
+  max-width: 60ch;
+  opacity: 0.85;
+}
+
+.sintomas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 52px);
+  padding: clamp(30px, 4.5vh, 52px) 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.sintoma .sttl {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: clamp(18px, 2.1vw, 25px);
+  margin-bottom: 12px;
+}
+
+.sintoma .sdesc {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.6vw, 18px);
+  opacity: 0.78;
+}
+
+.problema .pclose {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  font-size: clamp(19px, 2.3vw, 30px);
+  max-width: 36ch;
+}
+
+@media (max-width: 860px) {
+  .sintomas {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* --- 03 · Para quién ------------------------------------------------------ */
+
+.publicos {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(20px, 4vh, 44px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.publicos .section-label {
+  margin-top: clamp(30px, 4.5vh, 52px);
+}
+
+.carril {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: clamp(16px, 3vw, 46px);
+  padding: clamp(30px, 4.6vh, 54px) 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.carril:last-child {
+  border-bottom: none;
+}
+
+.carril .cnum {
+  font-size: 12px;
+  opacity: 0.5;
+  min-width: 30px;
+}
+
+.carril .cttl {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  font-size: clamp(23px, 2.9vw, 38px);
+  margin-bottom: 14px;
+  max-width: 24ch;
+}
+
+.carril .cdesc {
+  font-weight: 400;
+  line-height: 1.46;
+  font-size: clamp(15px, 1.7vw, 19px);
+  max-width: 60ch;
+  opacity: 0.82;
+}
+
+.carril .cref {
+  margin-top: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  opacity: 0.7;
+}
+
+.carril .cref .crl {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  opacity: 0.6;
+}
+
+.clink,
+.puente-link {
+  display: inline-block;
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
+.clink:hover,
+.puente-link:hover {
+  opacity: 1;
+}
+
+/* --- 04 · El método ------------------------------------------------------- */
+
+.metodo-home {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(46px, 8vh, 96px);
+}
+
+.metodo-home .msub {
+  margin-top: clamp(18px, 2.5vh, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: clamp(16px, 1.9vw, 22px);
+  max-width: 44ch;
+  opacity: 0.75;
+}
+
+.metodo-home .section-label {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.pasos {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 38px);
+  padding: clamp(32px, 4.8vh, 56px) 0;
+}
+
+.paso .pnum {
+  display: block;
+  font-size: 12px;
+  opacity: 0.5;
+  margin-bottom: 14px;
+}
+
+.paso .pttl {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: clamp(17px, 1.9vw, 22px);
+  margin-bottom: 10px;
+}
+
+.paso .pdesc {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(14px, 1.5vw, 16px);
+  opacity: 0.75;
+}
+
+.metodo-home .puente {
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: clamp(24px, 3.5vh, 38px);
+  font-size: clamp(15px, 1.7vw, 19px);
+  line-height: 1.5;
+  max-width: 62ch;
+  opacity: 0.85;
+}
+
+@media (max-width: 1000px) {
+  .pasos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 26px;
+  }
+}
+
+@media (max-width: 560px) {
+  .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 05 · El piloto ------------------------------------------------------- */
+
+.piloto {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(46px, 8vh, 96px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.piloto .section-label {
+  margin-top: clamp(30px, 4.5vh, 52px);
+}
+
+.piloto-def {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 52px);
+  padding: clamp(30px, 4.5vh, 52px) 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.pdef .pdl {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+
+.pdef p {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.28;
+  font-size: clamp(17px, 2vw, 24px);
+  max-width: 34ch;
+}
+
+.entregables {
+  padding: clamp(32px, 4.8vh, 56px) 0 clamp(10px, 2vh, 22px);
+}
+
+.entregables .el {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: clamp(22px, 3vh, 34px);
+}
+
+.entregable {
+  padding: clamp(20px, 3vh, 30px) 0;
+  border-top: 1px solid var(--ink);
+}
+
+.entregable .ettl {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  font-size: clamp(20px, 2.4vw, 30px);
+  margin-bottom: 10px;
+}
+
+.entregable .edesc {
+  font-weight: 400;
+  line-height: 1.48;
+  font-size: clamp(15px, 1.7vw, 19px);
+  max-width: 62ch;
+  opacity: 0.82;
+}
+
+.caja {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  border: 2px solid var(--ink);
+  border-radius: var(--r);
+  padding: clamp(22px, 3.4vw, 38px);
+}
+
+.caja .tag {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  margin-bottom: 14px;
+}
+
+.caja p {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.8vw, 20px);
+  max-width: 66ch;
+}
+
+.piloto .pfoot {
+  margin-top: clamp(26px, 4vh, 40px);
+  font-size: clamp(14px, 1.6vw, 18px);
+  line-height: 1.55;
+  max-width: 66ch;
+  opacity: 0.8;
+}
+
+@media (max-width: 860px) {
+  .piloto-def {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* --- 06 · Casos ----------------------------------------------------------- */
+
+.casos-home {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(46px, 8vh, 96px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.casos-home .csub {
+  margin-top: clamp(18px, 2.5vh, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: clamp(16px, 1.9vw, 22px);
+  opacity: 0.75;
+}
+
+.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 26px);
+  margin: clamp(30px, 4.5vh, 52px) 0 clamp(18px, 2.5vh, 28px);
+}
+
+.tarjeta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: clamp(150px, 20vh, 210px);
+  padding: clamp(20px, 2.6vw, 30px);
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  text-decoration: none;
+  color: var(--ink);
+  transition:
+    background 0.18s,
+    color 0.18s;
+}
+
+.tarjeta:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.tarjeta .tnum {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.tarjeta .tttl {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  font-size: clamp(20px, 2.3vw, 29px);
+  margin-top: auto;
+}
+
+.tarjeta .tarrow {
+  font-size: 18px;
+  opacity: 0.35;
+  transition:
+    opacity 0.18s,
+    transform 0.18s;
+}
+
+.tarjeta:hover .tarrow {
+  opacity: 1;
+  transform: translateX(6px);
+}
+
+@media (max-width: 860px) {
+  .tarjetas {
+    grid-template-columns: 1fr;
+  }
+
+  .tarjeta {
+    min-height: 0;
+  }
+}
+
+/* --- 07 · Equipo ---------------------------------------------------------- */
+
+.equipo {
+  padding: clamp(52px, 9vh, 112px) 0 clamp(46px, 8vh, 96px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.equipo .qsub {
+  margin-top: clamp(18px, 2.5vh, 28px);
+  font-weight: 400;
+  line-height: 1.4;
+  font-size: clamp(16px, 1.9vw, 22px);
+  max-width: 46ch;
+  opacity: 0.75;
+}
+
+.equipo .section-label {
+  margin-top: clamp(30px, 4.5vh, 52px);
+}
+
+.personas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 52px);
+  padding-top: clamp(32px, 4.8vh, 56px);
+}
+
+/* TODO (contenidos): faltan las fotos reales del equipo. Cuando lleguen van
+   sobre .qname, con la misma caja cuadrada en blanco y negro. Nada de stock. */
+.persona .qname {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+  font-size: clamp(20px, 2.3vw, 28px);
+  margin-bottom: 8px;
+}
+
+.persona .qrole {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 14px;
+}
+
+.persona .qdesc {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.6vw, 18px);
+  opacity: 0.8;
+}
+
+@media (max-width: 860px) {
+  .personas {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ==========================================================================
+   SERVICIOS
+   ========================================================================== */
+
+.tramos {
+  padding: clamp(20px, 4vh, 44px) 0 clamp(44px, 7vh, 92px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.tramo {
+  display: grid;
+  grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
+  gap: clamp(20px, 4vw, 60px);
+  padding: clamp(30px, 4.6vh, 54px) 0;
+  border-bottom: 1px solid var(--ink);
+}
+
+.tramo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tramo-meta .rnum {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.tramo-meta .rname {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  font-size: clamp(23px, 2.8vw, 36px);
+}
+
+.tramo-body .rdesc {
+  font-weight: 400;
+  line-height: 1.46;
+  font-size: clamp(16px, 1.8vw, 20px);
+  max-width: 58ch;
+}
+
+.ficha {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 8px clamp(14px, 2vw, 26px);
+  margin-top: clamp(20px, 3vh, 30px);
+  padding-top: clamp(18px, 2.6vh, 26px);
+  border-top: 1px solid var(--ink);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.ficha dt {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  white-space: nowrap;
+}
+
+.ficha dd {
+  letter-spacing: 0.02em;
+}
+
+.tramos .nota {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 66ch;
+  opacity: 0.75;
+}
+
+@media (max-width: 720px) {
+  .tramo {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- El tablero ----------------------------------------------------------- */
+
+.tablero {
+  padding: clamp(20px, 4vh, 44px) 0 clamp(46px, 8vh, 96px);
+}
+
+.tablero .section-label {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.tablero h2 {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  font-size: clamp(28px, 4.4vw, 56px);
+}
+
+.reglas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 52px);
+  padding: clamp(32px, 4.8vh, 56px) 0;
+}
+
+.regla .gttl {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  font-size: clamp(18px, 2.1vw, 25px);
+  margin-bottom: 12px;
+}
+
+.regla .gdesc {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.6vw, 18px);
+  opacity: 0.78;
+}
+
+.tablero .aclaracion {
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  padding-top: clamp(24px, 3.5vh, 38px);
+  font-size: 13px;
+  line-height: 1.7;
+  max-width: 68ch;
+  opacity: 0.8;
+}
+
+@media (max-width: 860px) {
+  .reglas {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+
+/* --- Preguntas frecuentes ------------------------------------------------- */
+
+.faq {
+  padding: clamp(20px, 4vh, 44px) 0 clamp(44px, 7vh, 92px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.pregunta {
+  padding: clamp(26px, 4vh, 44px) 0;
+  border-bottom: 1px solid var(--ink);
+  scroll-margin-top: 120px;
+}
+
+.pregunta:last-child {
+  border-bottom: none;
+}
+
+.pregunta .q {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  font-size: clamp(19px, 2.3vw, 29px);
+  margin-bottom: 14px;
+  max-width: 34ch;
+}
+
+.pregunta .a {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.7vw, 19px);
+  max-width: 66ch;
+  opacity: 0.82;
+}
+
+/* --- Cómo nos organizamos ------------------------------------------------- */
+
+.organiza {
+  padding: clamp(20px, 4vh, 44px) 0 clamp(52px, 9vh, 104px);
+}
+
+.organiza h2 {
+  margin-top: clamp(30px, 4.5vh, 52px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  font-size: clamp(22px, 3vw, 40px);
+}
+
+.organiza .ointro {
+  margin-top: clamp(18px, 2.5vh, 28px);
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(15px, 1.7vw, 19px);
+  max-width: 66ch;
+  opacity: 0.8;
+}
+
+.dispositivos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 52px);
+  margin-top: clamp(32px, 4.8vh, 56px);
+  padding-top: clamp(28px, 4vh, 44px);
+  border-top: 1px solid var(--ink);
+}
+
+.dispositivo {
+  scroll-margin-top: 120px;
+}
+
+.dispositivo .vn {
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-size: clamp(21px, 2.4vw, 30px);
+}
+
+.dispositivo .vv {
+  margin: 8px 0 14px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+.dispositivo .vdesc {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: clamp(14px, 1.5vw, 17px);
+  opacity: 0.8;
+}
+
+@media (max-width: 860px) {
+  .dispositivos {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ==========================================================================
+   CASOS · plantilla y lección
+   ========================================================================== */
+
+.plantilla {
+  padding: clamp(20px, 4vh, 44px) 0 clamp(30px, 5vh, 60px);
+  border-bottom: 2px solid var(--ink);
+}
+
+.plantilla .tintro {
+  margin-top: clamp(24px, 3.5vh, 38px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  font-size: clamp(17px, 2vw, 24px);
+  max-width: 40ch;
+}
+
+.plantilla .pasos {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  padding-bottom: 0;
+}
+
+@media (max-width: 860px) {
+  .plantilla .pasos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .plantilla .pasos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.caso .probado {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--ink);
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.5;
+  max-width: 56ch;
+}
+
+.caso .probado .pl {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.5;
+  margin-bottom: 6px;
+}
+
+/* ==========================================================================
+   SISTEMA · encabezado y puente
+   ========================================================================== */
+
+.encabezado {
+  background: var(--ink);
+  color: var(--bg);
+  padding: clamp(40px, 7vh, 88px) 0;
+}
+
+.encabezado .head-claim {
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.24;
+  font-size: clamp(20px, 2.6vw, 34px);
+  max-width: 30ch;
+}
+
+.encabezado .head-claim b {
+  font-weight: 800;
+}
+
+.puente-piloto {
+  padding: clamp(40px, 7vh, 88px) 0;
+  border-top: 2px solid var(--ink);
+}
+
+.puente-piloto p {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  font-size: clamp(17px, 2vw, 24px);
+  max-width: 52ch;
 }

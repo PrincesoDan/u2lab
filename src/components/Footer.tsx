@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom'
-import { COPYRIGHT_YEAR } from '../config'
-import { PAGE_KEYS, pathFor } from '../routes'
+import { COPYRIGHT_YEAR, SITE_DOMAIN } from '../config'
+import { NAME_ANCHOR, pathFor } from '../routes'
 import { useSite } from '../site-context'
 import { BookButton } from './BookButton'
 import { Mark } from './Rich'
 
-/** Pie de las páginas interiores. La home cierra con su propia sección. */
+/**
+ * Pensamiento vive aquí y no en la navegación principal: ante una fundación o
+ * una universidad suma credibilidad, pero ante una empresa lee como proyecto
+ * académico. En el pie sigue disponible sin condicionar la primera lectura.
+ */
 export function Footer() {
   const { locale, page, t } = useSite()
-
-  // El original lista todas las páginas menos aquella en la que se está.
-  const links = PAGE_KEYS.filter((key) => key !== page)
 
   return (
     <footer>
@@ -20,20 +21,32 @@ export function Footer() {
             <Mark />
           </div>
           <div className="foot-nav mono">
-            {links.map((key) => (
-              <Link key={key} to={pathFor(locale, key)}>
-                {key === 'home' ? t.common.home : t.common.nav[key]}
-              </Link>
-            ))}
+            <Link to={pathFor(locale, 'system')} aria-current={page === 'system' ? 'page' : undefined}>
+              {t.common.nav.system}
+            </Link>
+            <Link
+              to={pathFor(locale, 'thinking')}
+              aria-current={page === 'thinking' ? 'page' : undefined}
+            >
+              {t.common.nav.thinking}
+            </Link>
+            <Link to={`${pathFor(locale, 'services')}#${NAME_ANCHOR}`}>
+              {t.common.footer.nameLink}
+            </Link>
           </div>
         </div>
 
-        <BookButton tone="paper" className="foot-book" />
+        {/* En la home el bloque de cierre ya lleva el CTA: no se repite aquí. */}
+        {page !== 'home' && <BookButton tone="paper" className="foot-book" />}
 
         <div className="foot-rule" />
         <div className="foot-bot mono">
-          <span>(U)² Lab © {COPYRIGHT_YEAR}</span>
-          <span>{t.common.tagline}</span>
+          <span>
+            <Mark /> © {COPYRIGHT_YEAR}
+          </span>
+          <span>
+            {t.common.footer.location} · {SITE_DOMAIN}
+          </span>
         </div>
       </div>
     </footer>
