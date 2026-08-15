@@ -43,6 +43,7 @@ export const en: Content = {
       ],
       microcopy:
         'No cost and no prior quote. First we check whether the problem we describe is the one that actually hurts.',
+      frames: ['Noise', 'Method', 'Signal'],
     },
 
     problem: {

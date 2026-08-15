@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BookButton } from '../components/BookButton'
+import { HeroSequence } from '../components/HeroSequence'
 import { Lines } from '../components/Lines'
 import { Rich } from '../components/Rich'
 import { SectionLabel } from '../components/SectionLabel'
@@ -19,27 +20,29 @@ export function Home() {
 
   return (
     <>
-      {/* 01 · HERO */}
-      <section className="portada">
-        <div className="wrap">
+      {/* 01 · HERO · el paisaje en movimiento, ruido → método → señal */}
+      <HeroSequence frames={c.hero.frames}>
+        <div className="hero-left">
           <div className="kicker mono">{c.hero.kicker}</div>
           <h1>
             <Lines lines={c.hero.titleLines} />
           </h1>
+        </div>
+        <div className="hero-right">
           <p className="claim">{c.hero.sub}</p>
-
-          <div className="cta-row">
-            <BookButton tone="paper" />
-          </div>
+          <BookButton />
           <p className="microcopy mono">{c.hero.microcopy}</p>
+        </div>
+      </HeroSequence>
 
-          <div className="princ">
-            {c.hero.positions.map((p, i) => (
-              <p key={i}>
-                <Rich text={p} />
-              </p>
-            ))}
-          </div>
+      {/* Las dos líneas de posición, ya sobre el papel */}
+      <section className="posiciones">
+        <div className="wrap">
+          {c.hero.positions.map((p, i) => (
+            <p key={i}>
+              <Rich text={p} />
+            </p>
+          ))}
         </div>
       </section>
 
@@ -195,7 +198,7 @@ export function Home() {
           <h2>{c.closing.h2}</h2>
           <p>{c.closing.body}</p>
           <div className="cta-row">
-            <BookButton tone="paper" label={c.closing.cta} />
+            <BookButton label={c.closing.cta} />
           </div>
         </div>
       </section>

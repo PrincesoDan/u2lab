@@ -43,6 +43,7 @@ export const es: Content = {
       ],
       microcopy:
         'Sin costo y sin cotización previa. Primero contrastamos si el problema que describimos es el que le duele.',
+      frames: ['Ruido', 'Método', 'Señal'],
     },
 
     problem: {

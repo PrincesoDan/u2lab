@@ -37,7 +37,7 @@ export function Footer() {
         </div>
 
         {/* En la home el bloque de cierre ya lleva el CTA: no se repite aquí. */}
-        {page !== 'home' && <BookButton tone="paper" className="foot-book" />}
+        {page !== 'home' && <BookButton tone="papel" className="foot-book" />}
 
         <div className="foot-rule" />
         <div className="foot-bot mono">

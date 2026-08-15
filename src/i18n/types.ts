@@ -49,6 +49,8 @@ export interface HomeContent {
     /** Las dos líneas de posición heredadas del sitio anterior. */
     positions: readonly RichText[]
     microcopy: string
+    /** Rótulo de cada cuadro de la secuencia: ruido → método → señal. */
+    frames: readonly [string, string, string]
   }
 
   problem: {
