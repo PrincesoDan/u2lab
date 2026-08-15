@@ -1,6 +1,13 @@
+
+#Deploy
 node_modules
+.venv
 dist
 dist-ssr
 *.local
 .DS_Store
 .vite
+
+
+#skills
+.claude

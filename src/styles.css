@@ -233,6 +233,13 @@ header {
   margin-top: 0;
 }
 
+/* Ninguna ancla debe quedar debajo del header sticky. */
+section[id],
+[id].pregunta,
+[id].dispositivo {
+  scroll-margin-top: 150px;
+}
+
 /* --- Section label -------------------------------------------------------- */
 
 .section-label {
@@ -262,6 +269,7 @@ header {
   font-size: clamp(13px, 1.6vw, 16px);
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  line-height: 1.5;
   margin-bottom: clamp(26px, 5vh, 52px);
   opacity: 0.9;
 }
@@ -440,11 +448,11 @@ footer {
 
 .portada .claim {
   margin-top: clamp(30px, 5vh, 52px);
-  max-width: 26ch;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.1;
-  font-size: clamp(20px, 2.5vw, 34px);
+  max-width: 42ch;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.28;
+  font-size: clamp(18px, 2.1vw, 27px);
   opacity: 0.95;
 }
 
@@ -1265,7 +1273,6 @@ footer {
 .clink,
 .puente-link {
   display: inline-block;
-  margin-top: 14px;
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1279,6 +1286,12 @@ footer {
 .clink:hover,
 .puente-link:hover {
   opacity: 1;
+}
+
+/* Solo cuando el enlace va suelto, no incrustado en un párrafo. */
+.carril .clink,
+.casos-home > .wrap > .puente-link {
+  margin-top: 14px;
 }
 
 /* --- 04 · El método ------------------------------------------------------- */
@@ -1330,8 +1343,11 @@ footer {
   opacity: 0.75;
 }
 
+.metodo-home .pasos {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
 .metodo-home .puente {
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
   padding-top: clamp(24px, 3.5vh, 38px);
   font-size: clamp(15px, 1.7vw, 19px);
   line-height: 1.5;
@@ -1712,8 +1728,11 @@ footer {
   opacity: 0.78;
 }
 
+.tablero .reglas {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
 .tablero .aclaracion {
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
   padding-top: clamp(24px, 3.5vh, 38px);
   font-size: 13px;
   line-height: 1.7;

@@ -12,7 +12,7 @@ export const en: Content = {
     },
     home: 'Home',
     book: 'Book a one-hour diagnostic',
-    bookShort: 'Book a diagnostic',
+    bookShort: 'Book',
     switchLang: 'Switch language',
     footer: {
       location: 'Santiago, Chile',

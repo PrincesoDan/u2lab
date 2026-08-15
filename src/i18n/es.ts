@@ -12,7 +12,7 @@ export const es: Content = {
     },
     home: 'Inicio',
     book: 'Agendar una hora de diagnóstico',
-    bookShort: 'Agendar diagnóstico',
+    bookShort: 'Agendar',
     switchLang: 'Cambiar idioma',
     footer: {
       location: 'Santiago de Chile',
