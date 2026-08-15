@@ -1,30 +1,49 @@
 /* ==========================================================================
    Utopía Lab — hoja de estilos única.
 
-   Migrada desde los <style> inline del sitio original. Las reglas comunes
-   viven arriba; las de cada página van aisladas bajo `.page-<key>` porque en
-   el original varias clases (.cierre, .intro .lead, .op, .dim…) significaban
-   cosas distintas en cada archivo.
+   Dirección «crema»: la paleta sale de las tres ilustraciones de public/image
+   (medida sobre los archivos, no estimada). El sitio es una ventana de papel
+   redondeada sobre fondo tinta; el hero encadena los tres cuadros del mismo
+   paisaje —ruido, método, señal— que son la tesis de la página.
+
+   Las reglas comunes viven arriba; las de cada página van aisladas bajo
+   `.page-<key>` porque varias clases (.cierre, .intro .lead, .op, .dim…)
+   significan cosas distintas en cada una.
    ========================================================================== */
 
 /* --- Base ----------------------------------------------------------------- */
 
 :root {
-  --bg: #ffffff;
-  --ink: #000000;
-  --r: 8px;
+  /* Paleta extraída de las ilustraciones. El texto va SIEMPRE en --tinta:
+     el naranja sobre papel no pasa contraste y este sitio se mira al sol. */
+  --papel: #f2e9d8;
+  --arena: #ead9bd;
+  --tinta: #181818;
+  --sol: #f0580c;
+  --arco: #00417f;
+  --agua: #78b0a8;
+  --ambar: #f8a800;
+  --rosa: #f090a0;
 
-  /* Tipografía principal. Helvetica es de licencia propietaria: no se puede
-     servir como webfont, así que va como stack de sistema. En máquinas sin
-     Helvetica (la mayoría de Linux y Windows) cae en Arial, que comparte
-     métricas. */
+  /* Roles. El resto de la hoja usa --bg y --ink, así que la inversión de una
+     banda se resuelve cambiando solo estos dos. */
+  --bg: var(--papel);
+  --ink: var(--tinta);
+
+  --r: 14px;
+  --r-win: 28px;
+  --r-pill: 999px;
+
+  /* Tipografía. Se mantiene la del sitio: Helvetica como stack de sistema
+     (licencia propietaria, no se puede servir como webfont) y JetBrains Mono
+     para rótulos, numeración y datos. */
   --font-sans: 'Helvetica Neue', Helvetica, Arial, 'Liberation Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
 
 .invert {
-  --bg: #000000;
-  --ink: #ffffff;
+  --bg: var(--tinta);
+  --ink: var(--papel);
   background: var(--bg);
   color: var(--ink);
 }
@@ -37,15 +56,25 @@
 
 html {
   scroll-behavior: smooth;
+  background: var(--tinta);
 }
 
 body {
-  background: var(--bg);
+  background: var(--tinta);
   color: var(--ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   line-height: 1.1;
   overflow-x: hidden;
+}
+
+/* La ventana de papel. `clip` y no `hidden`: `hidden` crearía un contenedor de
+   scroll y rompería el `position: sticky` del hero. */
+.site {
+  background: var(--papel);
+  border-radius: var(--r-win);
+  overflow: clip;
+  margin: 10px;
 }
 
 .mono {
@@ -56,86 +85,88 @@ a {
   color: inherit;
 }
 
+:focus-visible {
+  outline: 2px solid var(--arco);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
 .wrap {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 clamp(20px, 5vw, 72px);
 }
 
-/* --- Header --------------------------------------------------------------- */
+/* --- Header flotante -------------------------------------------------------
+   Flota sobre el contenido en vez de empujarlo, para que el hero ocupe la
+   pantalla completa. */
 
 header {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 22px;
+  left: 22px;
+  right: 22px;
   z-index: 50;
-  background: var(--bg);
-  border-bottom: 2px solid var(--ink);
-}
-
-.bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 12px;
+  pointer-events: none;
+}
+
+header > * {
+  pointer-events: auto;
 }
 
 .brand {
-  font-weight: 800;
-  font-size: 19px;
+  font-weight: 700;
+  font-size: 17px;
   letter-spacing: -0.02em;
   text-decoration: none;
-  color: var(--ink);
+  color: var(--tinta);
   white-space: nowrap;
-}
-
-.bar-right {
-  display: flex;
-  align-items: center;
-  gap: clamp(12px, 2vw, 26px);
-  min-width: 0;
+  background: var(--papel);
+  border-radius: var(--r-pill);
+  padding: 10px 18px;
 }
 
 .nav {
   display: flex;
-  gap: clamp(14px, 2vw, 26px);
+  align-items: center;
+  gap: 6px;
+  padding: 5px;
+  background: var(--papel);
+  border-radius: var(--r-pill);
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .nav a {
   text-decoration: none;
-  color: var(--ink);
-  border-bottom: 1px solid transparent;
-  padding-bottom: 2px;
-  transition: border-color 0.15s;
+  color: var(--tinta);
+  padding: 9px 14px;
+  border-radius: var(--r-pill);
   white-space: nowrap;
+  opacity: 0.65;
+  transition:
+    opacity 0.15s,
+    background 0.15s;
 }
 
-.nav a:hover,
+.nav a:hover {
+  opacity: 1;
+  background: rgba(24, 24, 24, 0.07);
+}
+
 .nav a[aria-current='page'] {
-  border-color: var(--ink);
+  opacity: 1;
+  background: rgba(24, 24, 24, 0.1);
 }
 
-/* Bajo 900px la navegación baja a una segunda fila del header. Antes se
-   escondía, pero ahora es la navegación real del sitio: ocultarla dejaría sin
-   rumbo justo al visitante que llega desde el celular. */
-@media (max-width: 900px) {
-  .nav {
-    order: 3;
-    width: 100%;
-    border-top: 1px solid var(--ink);
-    padding: 12px 0;
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none;
-  }
+.nav .nav-cta {
+  opacity: 1;
 }
 
 /* --- Selector de idioma --------------------------------------------------- */
@@ -143,9 +174,13 @@ header {
 .lang {
   display: flex;
   align-items: center;
-  font-size: 12px;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  letter-spacing: 0.08em;
   white-space: nowrap;
+  background: var(--papel);
+  border-radius: var(--r-pill);
+  padding: 10px 14px;
+  font-family: var(--font-mono);
 }
 
 .lang a {
@@ -163,20 +198,24 @@ header {
 }
 
 .lang-sep {
-  padding: 0 7px;
+  padding: 0 6px;
   opacity: 0.3;
 }
 
-/* --- CTA "Agendar una hora de diagnóstico" -------------------------------- */
+/* --- CTA "Agendar una hora de diagnóstico" --------------------------------
+   Píldora con insignia de flecha. El naranja lleva texto en tinta: con texto
+   claro el contraste cae a 2,8:1. */
 
 .book {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   text-decoration: none;
-  border-radius: var(--r);
-  padding: 11px 18px;
+  border-radius: var(--r-pill);
+  padding: 12px 12px 12px 20px;
   line-height: 1;
   white-space: nowrap;
   transition:
@@ -184,43 +223,91 @@ header {
     color 0.15s;
 }
 
-.book-ink {
-  color: var(--ink);
-  border: 1px solid var(--ink);
+.book-sol {
+  background: var(--sol);
+  color: var(--tinta);
 }
 
-.book-ink:hover {
-  background: var(--ink);
-  color: var(--bg);
+.book-sol:hover {
+  background: var(--tinta);
+  color: var(--papel);
 }
 
-.book-paper {
-  color: var(--bg);
-  border: 1px solid var(--bg);
+.book-tinta {
+  background: var(--tinta);
+  color: var(--papel);
 }
 
-.book-paper:hover {
-  background: var(--bg);
-  color: var(--ink);
+.book-tinta:hover {
+  background: var(--sol);
+  color: var(--tinta);
+}
+
+.book-papel {
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.book-papel:hover {
+  background: var(--sol);
+}
+
+.book-badge {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: currentColor;
+  font-size: 12px;
+  flex: none;
+}
+
+.book-badge::before {
+  content: '→';
+}
+
+/* La insignia invierte el botón: círculo en el color contrario, glifo en el
+   color del fondo del botón. */
+.book-sol .book-badge {
+  background: var(--tinta);
+  color: var(--sol);
+}
+
+.book-tinta .book-badge {
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.book-papel .book-badge {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.book:hover .book-badge {
+  background: currentColor;
+}
+
+/* Sin insignia (la píldora compacta del header). */
+.nav-cta {
+  padding: 9px 16px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
 }
 
 .book-short {
   display: none;
 }
 
-@media (max-width: 640px) {
-  header .book-long {
+@media (max-width: 720px) {
+  .book-long {
     display: none;
   }
-  header .book-short {
+  .book-short {
     display: inline;
-  }
-  header .book {
-    padding: 11px 14px;
   }
 }
 
-/* Fila del CTA en las secciones de cierre. */
 .cta-row {
   display: flex;
   flex-wrap: wrap;
@@ -229,15 +316,252 @@ header {
   margin-top: clamp(24px, 3.5vh, 40px);
 }
 
-.cta-row .book {
-  margin-top: 0;
+/* --- Header en pantallas chicas -------------------------------------------
+   La navegación baja a su propia píldora, desplazable en horizontal. Nunca se
+   esconde: es la navegación real del sitio. */
+
+@media (max-width: 980px) {
+  header {
+    top: 14px;
+    left: 14px;
+    right: 14px;
+    flex-wrap: wrap;
+  }
+
+  .nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 2px;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+  }
+
+  .nav a {
+    padding: 9px 8px;
+  }
+
+  /* El CTA tiene que caber entero: cortado a media píldora lee como un error. */
+  .nav .nav-cta {
+    padding: 9px 12px;
+    font-size: 10px;
+  }
 }
 
-/* Ninguna ancla debe quedar debajo del header sticky. */
-section[id],
-[id].pregunta,
-[id].dispositivo {
-  scroll-margin-top: 150px;
+/* ==========================================================================
+   HERO · la secuencia ruido → método → señal
+   ========================================================================== */
+
+.hero-seq {
+  height: 260vh;
+  position: relative;
+}
+
+.hero-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: clip;
+}
+
+.hero-frames {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-frame {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.12s linear;
+}
+
+.hero-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  display: block;
+}
+
+/* El papel sube desde abajo y disuelve la ilustración en la página. Es lo que
+   deja el titular legible sobre cualquiera de los tres cuadros. */
+.hero-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(242, 233, 216, 0) 58%,
+    rgba(242, 233, 216, 0.6) 78%,
+    var(--papel) 93%
+  );
+}
+
+.hero-content {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 30ch);
+  align-items: end;
+  gap: clamp(24px, 4vw, 64px);
+  padding-bottom: clamp(48px, 8vh, 92px);
+}
+
+.hero-left .kicker {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: clamp(11px, 1.2vw, 13px);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  margin-bottom: 18px;
+  background: rgba(242, 233, 216, 0.9);
+  border-radius: var(--r-pill);
+  padding: 7px 14px;
+}
+
+.hero-left h1 {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.86;
+  font-size: clamp(52px, 10.5vw, 168px);
+  color: var(--tinta);
+}
+
+.hero-right {
+  background: rgba(242, 233, 216, 0.9);
+  backdrop-filter: blur(4px);
+  border-radius: var(--r);
+  padding: clamp(18px, 2vw, 24px);
+}
+
+.hero-right .claim {
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.4;
+  font-size: clamp(15px, 1.6vw, 18px);
+  margin-bottom: 20px;
+  opacity: 0.85;
+}
+
+/* El CTA ocupa el ancho del panel: suelto se desbordaba de la columna. */
+.hero-right .book {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  white-space: normal;
+}
+
+.hero-right .microcopy {
+  margin-top: 14px;
+  font-size: 11px;
+  line-height: 1.6;
+  opacity: 0.6;
+}
+
+/* El rótulo de los tres cuadros: dice qué se está mirando. */
+.hero-track {
+  position: absolute;
+  left: clamp(20px, 5vw, 72px);
+  bottom: clamp(18px, 2.6vh, 26px);
+  display: flex;
+  gap: 20px;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.htick {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+}
+
+.htick i {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.htick.on {
+  opacity: 1;
+}
+
+.htick.on i {
+  background: var(--sol);
+}
+
+@media (max-width: 820px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 22px;
+  }
+
+  .hero-track {
+    gap: 12px;
+  }
+
+  .htick i {
+    width: 12px;
+  }
+}
+
+/* Sin movimiento: no hay secuencia, el hero es una sola pantalla. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-seq {
+    height: auto;
+  }
+
+  .hero-stage {
+    position: relative;
+    height: 100vh;
+  }
+
+  .hero-frame {
+    transition: none;
+  }
+}
+
+/* --- Las dos líneas de posición ------------------------------------------- */
+
+.posiciones {
+  border-bottom: 1px solid rgba(24, 24, 24, 0.18);
+  padding: clamp(30px, 4vh, 52px) 0 clamp(34px, 5vh, 64px);
+}
+
+.posiciones .wrap {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(22px, 3vw, 48px);
+  max-width: 1000px;
+  margin-inline: 0;
+}
+
+.posiciones p {
+  font-weight: 400;
+  line-height: 1.45;
+  font-size: clamp(15px, 1.7vw, 19px);
+  opacity: 0.8;
+  max-width: 38ch;
+}
+
+.posiciones p b {
+  font-weight: 700;
+  opacity: 1;
+}
+
+@media (max-width: 720px) {
+  .posiciones .wrap {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
 }
 
 /* --- Section label -------------------------------------------------------- */
@@ -260,8 +584,7 @@ section[id],
 .hero {
   background: var(--bg);
   color: var(--ink);
-  padding: clamp(56px, 11vh, 130px) 0 clamp(48px, 8vh, 104px);
-  border-bottom: 2px solid var(--ink);
+  padding: clamp(132px, 17vh, 200px) 0 clamp(48px, 8vh, 104px);
 }
 
 .kicker {
@@ -357,13 +680,6 @@ footer {
   padding: clamp(52px, 9vh, 104px) 0 40px;
 }
 
-/* Las páginas que terminan en blanco necesitan el filo contra el pie negro. */
-.page-system footer,
-.page-services footer,
-.page-cases footer {
-  border-top: 2px solid var(--bg);
-}
-
 .foot-top {
   display: flex;
   justify-content: space-between;
@@ -427,69 +743,10 @@ footer {
    HOME
    ========================================================================== */
 
-.portada {
-  background: #000;
-  color: #fff;
-  padding: clamp(70px, 15vh, 170px) 0 clamp(56px, 10vh, 124px);
-}
-
-.portada .kicker {
-  font-size: clamp(13px, 1.6vw, 16px);
-  margin-bottom: clamp(30px, 5vh, 56px);
-  opacity: 0.75;
-}
-
-.portada h1 {
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-  font-size: clamp(44px, 8.6vw, 128px);
-}
-
-.portada .claim {
-  margin-top: clamp(30px, 5vh, 52px);
-  max-width: 42ch;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 1.28;
-  font-size: clamp(18px, 2.1vw, 27px);
-  opacity: 0.95;
-}
-
-.portada .princ {
-  margin-top: clamp(42px, 6vh, 76px);
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(22px, 3vw, 48px);
-  max-width: 920px;
-  border-top: 1px solid rgba(255, 255, 255, 0.35);
-  padding-top: clamp(26px, 3.6vh, 38px);
-}
-
-.portada .princ p {
-  font-weight: 400;
-  line-height: 1.42;
-  font-size: clamp(15px, 1.7vw, 19px);
-  opacity: 0.82;
-  max-width: 38ch;
-}
-
-.portada .princ p b {
-  font-weight: 800;
-  opacity: 1;
-}
-
-@media (max-width: 720px) {
-  .portada .princ {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-}
-
 .page-home .cierre {
-  background: var(--ink);
-  color: var(--bg);
-  padding: clamp(56px, 10vh, 124px) 0 40px;
+  background: var(--tinta);
+  color: var(--papel);
+  padding: clamp(56px, 10vh, 124px) 0 clamp(46px, 8vh, 96px);
 }
 
 .page-home .cierre h2 {
@@ -1132,14 +1389,6 @@ footer {
    ========================================================================== */
 
 /* El microcopy del hero: va pegado al CTA, no al párrafo anterior. */
-.portada .microcopy {
-  margin-top: 14px;
-  font-size: 12px;
-  line-height: 1.6;
-  letter-spacing: 0.02em;
-  max-width: 52ch;
-  opacity: 0.6;
-}
 
 /* --- 02 · El problema ----------------------------------------------------- */
 
@@ -1499,10 +1748,11 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: clamp(150px, 20vh, 210px);
+  min-height: clamp(190px, 26vh, 260px);
   padding: clamp(20px, 2.6vw, 30px);
-  border: 1px solid var(--ink);
-  border-radius: var(--r);
+  background: var(--arena);
+  border: none;
+  border-radius: var(--r-pill) var(--r-pill) var(--r) var(--r);
   text-decoration: none;
   color: var(--ink);
   transition:
